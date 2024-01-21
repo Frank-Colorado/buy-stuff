@@ -3,11 +3,9 @@ import { Box, Typography, AppBar, Toolbar } from '@mui/material';
 const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ height: '6.5rem' }}>
         <Toolbar>
-          <Typography variant="h1" color="secondary">
-            Fresh n Stuff
-          </Typography>
+          <Typography variant="h2">Fresh n Stuff</Typography>
         </Toolbar>
       </AppBar>
     </Box>
