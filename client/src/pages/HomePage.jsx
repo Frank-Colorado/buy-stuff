@@ -2,10 +2,9 @@ import Directory from '../components/Directory';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1> HomePage </h1>
+    <section style={{ height: '100%' }}>
       <Directory />
-    </div>
+    </section>
   );
 };
 

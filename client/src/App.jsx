@@ -5,11 +5,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
     <Router>
-      <div>
+      <div className="App">
         <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
+        <div className="main">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
