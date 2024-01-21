@@ -1,3 +1,4 @@
+import DirectoryImage from './DirectoryImage.jsx';
 import FoodPhoto from './../assets/foodstockphoto.jpg';
 import BeveragePhoto from './../assets/beveragestockphoto.jpg';
 
