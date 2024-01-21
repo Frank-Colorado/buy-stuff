@@ -1,12 +1,17 @@
 import Header from './components/Header.jsx';
 import HomePage from './pages/HomePage.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <HomePage />
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
