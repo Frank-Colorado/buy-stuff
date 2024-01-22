@@ -1,6 +1,8 @@
 import DirectoryImage from './DirectoryImage.jsx';
 import FoodPhoto from './../assets/foodstockphoto.jpg';
 import BeveragePhoto from './../assets/beveragestockphoto.jpg';
+import WomensPhoto from './../assets/shopWomens.jpg';
+import MensPhoto from './../assets/shopMens.jpg';
 
 const Directory = () => {
   return (
@@ -12,8 +14,8 @@ const Directory = () => {
           height: '100%',
         }}
       >
-        <DirectoryImage image={FoodPhoto} title="Food" />
-        <DirectoryImage image={BeveragePhoto} title="Beverages" />
+        <DirectoryImage image={WomensPhoto} title="Food" />
+        <DirectoryImage image={MensPhoto} title="Beverages" />
       </div>
     </div>
   );
