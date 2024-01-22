@@ -8,9 +8,10 @@ const Footer = () => {
         position="static"
         sx={{
           backgroundColor: 'black',
+          height: '4rem',
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{}}>
           <Box
             sx={{
               flexGrow: 1,
