@@ -1,4 +1,4 @@
-import { Box, Typography, AppBar, Toolbar } from '@mui/material';
+import { Box, Typography, AppBar, Toolbar, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -13,8 +13,27 @@ const Header = () => {
             variant="h2"
             sx={{ fontWeight: 'bold', textDecoration: 'none', color: 'white' }}
           >
-            Fresh n Stuff
+            Odachi
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 7 }}>
+            <Button
+              component={Link}
+              to="/register"
+              variant="text"
+              sx={{
+                color: '#000000',
+                backgroundColor: 'white',
+                mr: 2,
+                '&:hover': {
+                  backgroundColor: '#000000',
+                  color: 'white',
+                },
+              }}
+            >
+              Register
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
