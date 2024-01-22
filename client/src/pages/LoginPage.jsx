@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import LoginForm from '../components/forms/LoginForm';
 
 const LoginPage = () => {
   return (
@@ -25,6 +26,7 @@ const LoginPage = () => {
         <Typography variant="h2" textTransform="uppercase" sx={{ mb: 3 }}>
           Login
         </Typography>
+        <LoginForm />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography variant="subtitle1">Need to Create an Account?</Typography>
