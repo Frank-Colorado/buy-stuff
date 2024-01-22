@@ -25,13 +25,17 @@ const SignupForm = () => {
     e.preventDefault();
     const { username, email, password, confirmPassword } = formState;
 
+    if (password.length < 5) {
+      setErrorState('Password must be at least 5 characters!');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setErrorState('Passwords Do Not Match!');
       return;
     }
 
-    console.log(formState);
-    setFormState(initialState);
+    setFormState({ ...initialState });
     setErrorState(null);
   };
 
@@ -78,7 +82,7 @@ const SignupForm = () => {
           onChange={handleChange}
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="Password (min 5 characters)"
           required
           size="small"
           fullWidth
