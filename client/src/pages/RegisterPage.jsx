@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import SignupForm from '../components/forms/SignupForm';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const RegisterPage = () => {
           padding: '1rem',
         }}
       >
-        <Typography variant="h2" textTransform="uppercase">
+        <Typography variant="h2" textTransform="uppercase" sx={{ mb: 3 }}>
           Register
         </Typography>
         <SignupForm />

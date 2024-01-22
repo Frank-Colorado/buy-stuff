@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" color="secondary">
         <Toolbar sx={{ height: '6.5rem' }}>
           <Typography
             component={Link}
@@ -22,8 +22,6 @@ const Header = () => {
               to="/register"
               variant="text"
               sx={{
-                color: '#000000',
-                backgroundColor: 'white',
                 mr: 2,
                 '&:hover': {
                   backgroundColor: '#000000',
@@ -38,8 +36,6 @@ const Header = () => {
               to="/login"
               variant="text"
               sx={{
-                color: '#000000',
-                backgroundColor: 'white',
                 '&:hover': {
                   borderBottom: '2px solid #000000',
                 },
