@@ -1,8 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const DirectoryImage = ({ image, name }) => {
-  console.log(name);
+const DirectoryImage = ({ image, title }) => {
   return (
     <Box
       style={{
@@ -15,33 +14,34 @@ const DirectoryImage = ({ image, name }) => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
-        '&::after': {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          zIndex: 1,
-        },
       }}
     >
-      <Typography
-        component={Link}
-        to={`/${name}`}
-        variant="h3"
+      <Box
         sx={{
-          position: 'relative',
-          zIndex: 2,
-          color: 'white',
-          textDecoration: 'none',
-          textAlign: 'center',
-          marginTop: '20rem',
-          fontWeight: 'bold',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+          width: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
         }}
       >
-        {name}
-      </Typography>
+        <Typography
+          component={Link}
+          to={`/${title}`}
+          variant="button"
+          sx={{
+            fontWeight: 'bold',
+            textDecoration: 'none',
+            color: 'black',
+            backgroundColor: 'white',
+            border: '1px solid black',
+            padding: '0.5rem',
+          }}
+        >
+          Shop {title}
+        </Typography>
+      </Box>
     </Box>
   );
 };
