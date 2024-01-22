@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from '@mui/material';
-
 import SignupForm from '../components/forms/SignupForm';
+import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
   return (
@@ -23,24 +23,30 @@ const RegisterPage = () => {
           padding: '1rem',
         }}
       >
-        <Typography
-          textTransform="uppercase"
-          sx={{
-            fontSize: '2.2rem',
-            fontWeight: 'bold',
-            lineHeight: '1',
-          }}
-        >
+        <Typography variant="h2" textTransform="uppercase">
           Register
         </Typography>
         <SignupForm />
       </Box>
-      <Typography>
-        Already have an account?
-        <Button color="secondary" href="/login">
-          Login
-        </Button>
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="subtitle1">Already have an account?</Typography>
+        <Typography
+          component={Link}
+          to="/login"
+          variant="subtitle1"
+          sx={{
+            ml: 1,
+            textDecoration: 'none',
+            color: 'black',
+            '&:hover': {
+              borderBottom: '1px solid black',
+              transition: 'all 0.4s ease-in',
+            },
+          }}
+        >
+          Login Here!
+        </Typography>
+      </Box>
     </Box>
   );
 };
