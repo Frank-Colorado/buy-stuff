@@ -1,7 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-import dotenv from 'dotenv';
-dotenv.config();
+require('dotenv').config();
+const db = require('./config/connection');
 
 const main = async () => {
   const PORT = process.env.PORT || 3001;
