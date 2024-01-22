@@ -21,10 +21,10 @@ const Footer = () => {
           >
             <IconButton
               aria-label="GitHub"
-              color="inherit"
               href="https://github.com/Frank-Colorado/friendly-octo-disco.git"
               target="_blank"
               sx={{
+                color: 'white',
                 '&:hover': {
                   transform: 'scale(1.2)',
                   transition: '0.5s ease-in',
@@ -34,7 +34,7 @@ const Footer = () => {
               <GitHubIcon
                 sx={{
                   width: '2.5rem',
-                  height: '3rem',
+                  height: '2rem',
                 }}
               />
             </IconButton>

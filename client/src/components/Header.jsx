@@ -11,7 +11,7 @@ const Header = () => {
             to="/"
             align="center"
             variant="h2"
-            sx={{ fontWeight: 'bold', textDecoration: 'none', color: 'white' }}
+            sx={{ fontWeight: 'bold', textDecoration: 'none', color: 'Black' }}
           >
             Odachi
           </Typography>
@@ -32,6 +32,20 @@ const Header = () => {
               }}
             >
               Register
+            </Button>
+            <Button
+              component={Link}
+              to="/login"
+              variant="text"
+              sx={{
+                color: '#000000',
+                backgroundColor: 'white',
+                '&:hover': {
+                  borderBottom: '2px solid #000000',
+                },
+              }}
+            >
+              Login
             </Button>
           </Box>
         </Toolbar>
