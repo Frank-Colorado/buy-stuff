@@ -7,7 +7,15 @@ export const theme = createTheme({
       main: '#FFFFFF',
     },
     secondary: {
-      main: '#f50057',
+      main: '#000000',
     },
   },
+  typography: {
+    h2: {
+      fontSize: '2.2rem',
+      fontWeight: 700,
+      lineHeight: 1.2,
+    },
+    }
+  }
 });
