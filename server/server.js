@@ -3,6 +3,7 @@ const { ApolloServer } = require('apollo-server-express');
 require('dotenv').config();
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas');
+const { authMiddleware } = require('./utils/auth');
 
 const main = async () => {
   const PORT = process.env.PORT || 3001;
@@ -10,6 +11,7 @@ const main = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: authMiddleware,
   });
 
   const app = express();
