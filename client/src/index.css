@@ -40,4 +40,5 @@ a:hover {
   height: calc(100% - 6.5rem);
   padding: 0 10rem;
   margin: 0 auto;
+  overflow: hidden;
 }
