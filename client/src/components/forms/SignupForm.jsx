@@ -102,7 +102,7 @@ const SignupForm = () => {
           sx={{ mb: 1 }}
         />
         <Button fullWidth variant="contained" sx={{ mb: 1 }} type="submit">
-          Sign Up
+          Register
         </Button>
       </form>
       {errorState && (

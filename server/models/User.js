@@ -20,6 +20,30 @@ const UserSchema = new Schema({
   },
 });
 
+// Pre-save middleware to encrypt password
+UserSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+
+  next();
+});
+
+// Custom post-save middleware for more custom error handling
+UserSchema.post('save', function (err, _doc, next) {
+  if (err.keyPattern.email) {
+    next(new Error('An account with this email already exists!'));
+  } else {
+    next(err);
+  }
+});
+
+// Custom method to compare and validate password for logging in
+UserSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 const User = model('User', UserSchema);
 
 module.exports = User;
