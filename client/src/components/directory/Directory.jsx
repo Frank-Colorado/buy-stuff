@@ -1,6 +1,6 @@
 import DirectoryImage from './DirectoryImage.jsx';
-import WomensPhoto from './../assets/shopWomens.jpg';
-import MensPhoto from './../assets/shopMen.jpg';
+import WomensPhoto from './../../assets/shopWomens.jpg';
+import MensPhoto from './../../assets/shopMen.jpg';
 
 const Directory = () => {
   return (
