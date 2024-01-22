@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const DirectoryImage = ({ image, name }) => {
+  console.log(name);
   return (
     <Box
       style={{
@@ -15,33 +16,28 @@ const DirectoryImage = ({ image, name }) => {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         '&::after': {
-          content: '""',
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0,0,0,0.3)',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
           zIndex: 1,
         },
       }}
     >
       <Typography
         component={Link}
-        to="/{name}"
+        to={`/${name}`}
+        variant="h3"
         sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          webkitTransform: 'translate(-50%, -50%)',
-          MozTransform: 'translate(-50%, -50%)',
-          transform: 'translate(-50%, -50%)',
+          position: 'relative',
           zIndex: 2,
-          textTransform: 'uppercase',
-          background: 'white',
-          color: 'black',
-          padding: '8px 10px',
-          border: '1px solid black',
+          color: 'white',
+          textDecoration: 'none',
+          textAlign: 'center',
+          marginTop: '20rem',
+          fontWeight: 'bold',
         }}
       >
         {name}

@@ -12,32 +12,8 @@ const Directory = () => {
           height: '100%',
         }}
       >
-        <div
-          style={{
-            backgroundImage: `url(${FoodPhoto})`,
-            width: '50%',
-            height: '100%',
-            float: 'left',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
-        >
-          <a> Shop Food </a>
-        </div>
-        <div
-          style={{
-            backgroundImage: `url(${BeveragePhoto})`,
-            width: '50%',
-            height: '100%',
-            float: 'left',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
-        >
-          <a> Shop Beverages </a>
-        </div>
+        <DirectoryImage image={FoodPhoto} title="Food" />
+        <DirectoryImage image={BeveragePhoto} title="Beverages" />
       </div>
     </div>
   );
