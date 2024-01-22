@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Box,
-  Icon,
-  Toolbar,
-  Typography,
-  IconButton,
-} from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Footer = () => {
