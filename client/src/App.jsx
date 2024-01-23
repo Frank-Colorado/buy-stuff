@@ -10,11 +10,19 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 
 const App = () => {
+  const isAdmin = false;
+
   return (
     <Router>
       <div className="App">
-        <AdminNav />
-        <Header />
+        {isAdmin ? (
+          <>
+            <AdminNav />
+            <Header />
+          </>
+        ) : (
+          <Header />
+        )}
         <div className="main">
           <Routes>
             <Route path="/" element={<HomePage />} />
