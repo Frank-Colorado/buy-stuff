@@ -25,8 +25,8 @@ const authMiddleware = ({ req }) => {
   return req;
 };
 
-const signToken = ({ username, email, _id }) => {
-  const payload = { username, email, _id };
+const signToken = ({ username, email, _id, roles }) => {
+  const payload = { username, email, _id, roles };
 
   return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
 };
