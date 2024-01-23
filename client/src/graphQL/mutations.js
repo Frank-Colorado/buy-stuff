@@ -8,6 +8,7 @@ export const CREATE_USER = gql`
         _id
         username
         email
+        roles
       }
     }
   }
@@ -21,6 +22,7 @@ export const LOGIN_USER = gql`
         _id
         username
         email
+        roles
       }
     }
   }
