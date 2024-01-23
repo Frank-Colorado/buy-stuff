@@ -29,6 +29,11 @@ const typeDefs = gql`
     user: User
   }
 
+  input SizeInput {
+    size: String
+    inStock: Boolean
+  }
+
   type Query {
     me: User
     clothingById(clothingId: ID!): Clothing
@@ -44,7 +49,7 @@ const typeDefs = gql`
       category: String!
       subtype: String!
       price: Float!
-      sizes: [Size]!
+      sizes: [SizeInput]!
       imageUrl: String
     ): Clothing
     updateClothing(
@@ -54,7 +59,7 @@ const typeDefs = gql`
       category: String
       subtype: String
       price: Float
-      sizes: [Size]
+      sizes: [SizeInput]
       imageUrl: String
     ): Clothing
     deleteClothing(clothingId: ID!): Clothing
