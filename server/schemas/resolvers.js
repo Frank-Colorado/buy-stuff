@@ -17,6 +17,15 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+    // Get all clothing items
+    allClothing: async () => {
+      try {
+        const clothing = await Clothing.find();
+        return clothing;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     // Get a single clothing item by its _id
     clothingById: async (_root, { clothingId }) => {
       try {
