@@ -11,7 +11,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 
 const App = () => {
-  const isAdmin = false;
+  const isAdmin = true;
 
   return (
     <Router>

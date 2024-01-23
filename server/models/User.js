@@ -18,6 +18,11 @@ const UserSchema = new Schema({
     required: [true, 'Password is required'],
     minlength: [5, 'Password must be 5 characters or longer'],
   },
+
+  roles: {
+    type: [String],
+    default: ['user'],
+  },
 });
 
 // Pre-save middleware to encrypt password
