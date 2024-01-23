@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Clothing } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -11,6 +11,24 @@ const resolvers = {
         return userData;
       }
       throw new AuthenticationError('Not logged in');
+    },
+    // Get a single clothing item by its _id
+    clothingById: async (_root, { clothingId }) => {
+      try {
+        const clothing = await Clothing.findById(clothingId);
+        return clothing;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    // Get all clothing items by category
+    clothingByCategory: async (_root, { category }) => {
+      try {
+        const clothing = await Clothing.find({ category });
+        return clothing;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   Mutation: {

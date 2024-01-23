@@ -31,7 +31,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    clothingById(_id: ID!): Clothing
+    clothingById(clothingId: ID!): Clothing
     clothingByCategory(category: String!): [Clothing]
   }
 
@@ -48,7 +48,7 @@ const typeDefs = gql`
       imageUrl: String
     ): Clothing
     updateClothing(
-      _id: ID!
+      clothingId: ID!
       name: String
       description: String
       category: String
@@ -57,7 +57,7 @@ const typeDefs = gql`
       sizes: [Size]
       imageUrl: String
     ): Clothing
-    deleteClothing(_id: ID!): Clothing
+    deleteClothing(clothingId: ID!): Clothing
   }
 `;
 
