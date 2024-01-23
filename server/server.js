@@ -1,5 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+const path = require('path');
 require('dotenv').config();
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas');
@@ -23,7 +24,7 @@ const main = async () => {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
 
-  app.get('*', (req, res) => {
+  app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
 
@@ -34,7 +35,7 @@ const main = async () => {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}!`);
       console.log(
-        `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
+        `GraphQL server ready at http://localhost:${PORT}${server.graphqlPath}`
       );
     });
   });
