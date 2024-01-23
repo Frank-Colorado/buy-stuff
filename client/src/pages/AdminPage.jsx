@@ -14,13 +14,13 @@ const AdminPage = () => {
   }
 
   return (
-    <Grid container sx={{ height: '100%  ' }}>
-      <Grid item xs={3}>
+    <Grid container sx={{ height: '100%' }}>
+      <Grid item xs={2} sx={{ borderRight: '1px solid black' }}>
         <UserSidebar />
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={10}>
         <Box>
-          <Button variant="contained" color="primary" sx={{ mt: 5 }}>
+          <Button variant="contained" color="primary" sx={{ mt: 5, ml: 5 }}>
             Add New Product
           </Button>
         </Box>
