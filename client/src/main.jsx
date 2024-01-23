@@ -1,6 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 
+// Redux store
+import { Provider } from 'react-redux';
+import store from './store';
+
 // Apollo client
 import {
   ApolloClient,
@@ -41,8 +45,10 @@ const client = new ApolloClient({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </ApolloProvider>
 );
