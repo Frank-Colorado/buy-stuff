@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 // Navbar Components
 import AdminNav from './components/navbars/AdminNav.jsx';
 import Header from './components/navbars/Header.jsx';
@@ -9,9 +8,11 @@ import HomePage from './pages/HomePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
+// Auth
+import Auth from './utils/auth.js';
 
 const App = () => {
-  const isAdmin = true;
+  const isAdmin = Auth.isAdmin();
 
   return (
     <Router>

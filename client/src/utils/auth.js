@@ -37,8 +37,7 @@ class AuthService {
     const token = this.loggedIn();
     if (token) {
       const decoded = decode(this.getToken());
-      console.log(decoded);
-      return decoded.roles.includes('admin');
+      return decoded.data.roles.includes('admin');
     } else {
       return false;
     }
