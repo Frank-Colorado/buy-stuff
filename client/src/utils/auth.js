@@ -32,6 +32,17 @@ class AuthService {
     localStorage.removeItem('jwtToken');
     window.location.reload();
   }
+
+  isAdmin() {
+    const token = this.loggedIn();
+    if (token) {
+      const decoded = decode(this.getToken());
+      console.log(decoded);
+      return decoded.roles.includes('admin');
+    } else {
+      return false;
+    }
+  }
 }
 
 export default new AuthService();
