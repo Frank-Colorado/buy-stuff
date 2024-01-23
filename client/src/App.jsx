@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Navbar Components
+import AdminNav from './components/navbars/AdminNav.jsx';
 import Header from './components/navbars/Header.jsx';
 import Footer from './components/navbars/Footer.jsx';
 // Pages
@@ -10,6 +13,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
+        <AdminNav />
         <Header />
         <div className="main">
           <Routes>
