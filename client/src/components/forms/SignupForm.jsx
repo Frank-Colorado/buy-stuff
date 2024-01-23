@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../../graphQL/mutations';
+import Auth from '../../utils/auth';
 
 const initialState = {
   username: '',
@@ -9,8 +12,12 @@ const initialState = {
 };
 
 const SignupForm = () => {
+  // Form and Error State
   const [formState, setFormState] = useState(initialState);
   const [errorState, setErrorState] = useState(null);
+
+  // GraphQL Mutation
+  const [createUser, { error }] = useMutation(CREATE_USER);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,9 +28,9 @@ const SignupForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, email, password, confirmPassword } = formState;
+    const { password, confirmPassword } = formState;
 
     if (password.length < 5) {
       setErrorState('Password must be at least 5 characters!');
@@ -33,6 +40,20 @@ const SignupForm = () => {
     if (password !== confirmPassword) {
       setErrorState('Passwords Do Not Match!');
       return;
+    }
+
+    try {
+      const { data } = await createUser({
+        variables: { ...formState },
+      });
+
+      if (data) {
+        // use auth to set the token to local storage
+        Auth.login(data.createUser.token);
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorState(error.message);
     }
 
     setFormState({ ...initialState });
