@@ -10,3 +10,39 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_CLOTHING_BY_ID = gql`
+  query clothingById($clothingId: ID!) {
+    clothingById(clothingId: $clothingId) {
+      _id
+      name
+      description
+      category
+      subtype
+      price
+      sizes {
+        size
+        inStock
+      }
+      imageUrl
+    }
+  }
+`;
+
+export const QUERY_CLOTHING_BY_CATEGORY = gql`
+  query clothingByCategory($category: String!) {
+    clothingByCategory(category: $category) {
+      _id
+      name
+      description
+      category
+      subtype
+      price
+      sizes {
+        size
+        inStock
+      }
+      imageUrl
+    }
+  }
+`;
