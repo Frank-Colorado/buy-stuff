@@ -8,6 +8,7 @@ import Footer from './components/navbars/Footer.jsx';
 import HomePage from './pages/HomePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
+import AdminPage from './pages/AdminPage.jsx';
 
 const App = () => {
   const isAdmin = false;
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
         <Footer />
