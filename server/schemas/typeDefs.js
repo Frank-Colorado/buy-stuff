@@ -36,6 +36,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    allClothing: [Clothing]
     clothingById(clothingId: ID!): Clothing
     clothingByCategory(category: String!): [Clothing]
   }
