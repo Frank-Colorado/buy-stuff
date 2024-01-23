@@ -55,6 +55,20 @@ const resolvers = {
       return { token, user };
     },
   },
+  // Mutation for adding a clothing item
+  addClothing: async (_root, args, context) => {
+    // if the context has a 'user' property that contains the 'admin' role in its 'roles' array
+    // then allow the mutation to execute
+    // This will be commented out for now to not interfere with the front end
+    // if (context.user.roles.includes('admin')) {
+    //   const clothing = await Clothing.create({ ...args });
+    //   return clothing;
+    // }
+    // // if the user is not an admin, throw an error
+    // throw new AuthenticationError('Not authorized');
+    const clothing = await Clothing.create({ ...args });
+    return clothing;
+  },
 };
 
 module.exports = resolvers;
