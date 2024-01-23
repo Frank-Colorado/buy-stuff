@@ -11,6 +11,24 @@ export const QUERY_ME = gql`
   }
 `;
 
+export const QUERY_ALL_CLOTHING = gql`
+  query allClothing {
+    allClothing {
+      _id
+      name
+      description
+      category
+      subtype
+      price
+      sizes {
+        size
+        inStock
+      }
+      imageUrl
+    }
+  }
+`;
+
 export const QUERY_CLOTHING_BY_ID = gql`
   query clothingById($clothingId: ID!) {
     clothingById(clothingId: $clothingId) {
