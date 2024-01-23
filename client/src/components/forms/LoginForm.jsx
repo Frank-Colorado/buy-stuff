@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../graphQL/mutations';
+import Auth from '../../utils/auth';
 
 const initialState = {
   email: '',
@@ -7,8 +10,12 @@ const initialState = {
 };
 
 const LoginForm = () => {
+  // Form and Error State
   const [formState, setFormState] = useState(initialState);
   const [errorState, setErrorState] = useState(null);
+
+  // GraphQL Login Mutation
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,13 +26,22 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { email, password } = formState;
+    try {
+      const { data } = await loginUser({
+        variables: { ...formState },
+      });
 
-    console.log({ email, password });
-
+      if (data) {
+        Auth.login(data.login.token);
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorState(err.message);
+      return;
+    }
     setFormState({ ...initialState });
     setErrorState(null);
   };

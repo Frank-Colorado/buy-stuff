@@ -16,8 +16,8 @@ const SignupForm = () => {
   const [formState, setFormState] = useState(initialState);
   const [errorState, setErrorState] = useState(null);
 
-  // GraphQL Mutation
-  const [createUser, { error }] = useMutation(CREATE_USER);
+  // GraphQL CreateUser Mutation
+  const [createUser] = useMutation(CREATE_USER);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,9 +53,9 @@ const SignupForm = () => {
       }
     } catch (err) {
       console.error(err);
-      setErrorState(error.message);
+      setErrorState(err.message);
+      return;
     }
-
     setFormState({ ...initialState });
     setErrorState(null);
   };
