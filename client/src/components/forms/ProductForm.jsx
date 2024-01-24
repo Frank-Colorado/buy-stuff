@@ -7,6 +7,7 @@ import {
   TextField,
   ToggleButtonGroup,
   ToggleButton,
+  Typography,
 } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { CREATE_PRODUCT } from '../../graphQL/mutations';
@@ -35,16 +36,18 @@ const subtypes = [
   },
 ];
 
+const initialState = {
+  name: '',
+  description: '',
+  price: 0,
+  imageUrl: '',
+  category: 'Mens',
+  subtype: 'Shirt',
+  sizes: ['XS'],
+};
+
 const ProductForm = () => {
-  const [formState, setFormState] = useState({
-    name: '',
-    description: '',
-    price: '',
-    imageUrl: '',
-    category: 'Mens',
-    subtype: 'Shirt',
-    size: ['XS'],
-  });
+  const [formState, setFormState] = useState(initialState);
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
 
@@ -60,7 +63,24 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({ ...formState });
+    const { price } = formState;
+    const parsedPrice = parseFloat(price);
+
+    try {
+      const { data } = await createProduct({
+        variables: { ...formState, price: parsedPrice },
+      });
+      if (data) {
+        // Here we would would use a snackbar to display a success message
+        // Then we would update Redux state with the new product
+        console.log(data);
+      }
+    } catch (err) {
+      console.error(err);
+      // Here we would would use a snackbar to display an error message
+      return;
+    }
+    setFormState({ ...initialState });
   };
 
   return (
@@ -211,18 +231,21 @@ const ProductForm = () => {
             ))}
           </TextField>
         </Box>
+
         <ToggleButtonGroup
-          value={formState.size}
+          value={formState.sizes}
           onChange={(_event, newSizes) => {
             setFormState({
               ...formState,
-              size: newSizes,
+              sizes: newSizes,
             });
           }}
           size="large"
           name="size"
           required
-          sx={{ mt: 1 }}
+          sx={{
+            mt: 3,
+          }}
         >
           <ToggleButton value="XS" sx={{ width: '75px' }}>
             XS

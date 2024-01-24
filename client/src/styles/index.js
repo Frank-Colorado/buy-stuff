@@ -9,6 +9,7 @@ export const theme = createTheme({
     secondary: {
       main: '#ffffff',
     },
+    divider: 'rgba(0,0,0,0.8)',
   },
   typography: {
     h2: {
