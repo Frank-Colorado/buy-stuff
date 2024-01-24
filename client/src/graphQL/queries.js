@@ -11,7 +11,7 @@ export const QUERY_ME = gql`
   }
 `;
 
-export const QUERY_ALL_CLOTHING = gql`
+export const QUERY_ALL_PRODUCTS = gql`
   query allClothing {
     allClothing {
       _id
@@ -26,7 +26,7 @@ export const QUERY_ALL_CLOTHING = gql`
   }
 `;
 
-export const QUERY_CLOTHING_BY_ID = gql`
+export const QUERY_PRODUCT_BY_ID = gql`
   query clothingById($clothingId: ID!) {
     clothingById(clothingId: $clothingId) {
       _id
@@ -41,7 +41,7 @@ export const QUERY_CLOTHING_BY_ID = gql`
   }
 `;
 
-export const QUERY_CLOTHING_BY_CATEGORY = gql`
+export const QUERY_PRODUCT_BY_CATEGORY = gql`
   query clothingByCategory($category: String!) {
     clothingByCategory(category: $category) {
       _id

@@ -28,7 +28,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const ADD_CLOTHING = gql`
+export const CREATE_PRODUCT = gql`
   mutation addClothing(
     $name: String!
     $description: String!
@@ -59,7 +59,7 @@ export const ADD_CLOTHING = gql`
   }
 `;
 
-export const UPDATE_CLOTHING = gql`
+export const UPDATE_PRODUCT = gql`
   mutation updateClothing(
     $clothingId: ID!
     $name: String
@@ -92,7 +92,7 @@ export const UPDATE_CLOTHING = gql`
   }
 `;
 
-export const DELETE_CLOTHING = gql`
+export const DELETE_PRODUCT = gql`
   mutation deleteClothing($clothingId: ID!) {
     deleteClothing(clothingId: $clothingId) {
       _id

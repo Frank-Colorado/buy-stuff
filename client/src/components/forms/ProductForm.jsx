@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import {
   Box,
   Button,
@@ -9,6 +8,8 @@ import {
   ToggleButtonGroup,
   ToggleButton,
 } from '@mui/material';
+import { useMutation } from '@apollo/client';
+import { ADD_CLOTHING } from '../../graphQL/mutations';
 
 const subtypes = [
   {
