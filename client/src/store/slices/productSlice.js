@@ -4,7 +4,7 @@ const productSlice = createSlice({
   name: 'product',
   initialState: [],
   reducers: {
-    setProducts: (state, { payload }) => {
+    setProducts: (_state, { payload }) => {
       // Replace the current state with the new array of products
       return payload;
     },
