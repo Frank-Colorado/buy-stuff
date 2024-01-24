@@ -9,7 +9,7 @@ import {
   ToggleButton,
 } from '@mui/material';
 import { useMutation } from '@apollo/client';
-import { ADD_CLOTHING } from '../../graphQL/mutations';
+import { CREATE_PRODUCT } from '../../graphQL/mutations';
 
 const subtypes = [
   {
@@ -46,6 +46,8 @@ const ProductForm = () => {
     size: ['XS'],
   });
 
+  const [createProduct] = useMutation(CREATE_PRODUCT);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -53,6 +55,12 @@ const ProductForm = () => {
       ...formState,
       [name]: value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log({ ...formState });
   };
 
   return (
@@ -65,6 +73,7 @@ const ProductForm = () => {
       }}
     >
       <form
+        onSubmit={handleSubmit}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -80,6 +89,7 @@ const ProductForm = () => {
           size="small"
           variant="outlined"
           fullWidth
+          required
           sx={{ mt: 1 }}
         />
         <TextField
@@ -92,6 +102,7 @@ const ProductForm = () => {
           size="small"
           variant="outlined"
           fullWidth
+          required
           sx={{ mt: 1 }}
         />
         <TextField
@@ -102,6 +113,7 @@ const ProductForm = () => {
           size="small"
           variant="outlined"
           fullWidth
+          required
           InputProps={{
             type: 'number',
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
@@ -125,6 +137,7 @@ const ProductForm = () => {
           size="small"
           variant="outlined"
           fullWidth
+          required
           sx={{ mt: 1 }}
         />
         <Box
@@ -208,6 +221,7 @@ const ProductForm = () => {
           }}
           size="large"
           name="size"
+          required
           sx={{ mt: 1 }}
         >
           <ToggleButton value="XS" sx={{ width: '75px' }}>
@@ -236,9 +250,7 @@ const ProductForm = () => {
           color="primary"
           fullWidth
           sx={{ mt: 1 }}
-          onClick={() => {
-            console.log(formState);
-          }}
+          type="submit"
         >
           Add Product
         </Button>

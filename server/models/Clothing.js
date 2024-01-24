@@ -25,8 +25,8 @@ const ClothingSchema = new Schema({
   },
   sizes: {
     type: [String],
+    default: [],
     enum: ['XS', 'S', 'M', 'L', 'XL'],
-    required: [true, 'Sizes are required'],
   },
   imageUrl: {
     type: String,

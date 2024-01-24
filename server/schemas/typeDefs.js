@@ -40,7 +40,7 @@ const typeDefs = gql`
       category: String!
       subtype: String!
       price: Float!
-      sizes: [String]!
+      sizes: [String]
       imageUrl: String
     ): Clothing
     updateClothing(
