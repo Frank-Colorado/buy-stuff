@@ -1,5 +1,5 @@
 // components for admin page
-import UserSidebar from '../components/navbars/UserSidebar.jsx';
+import AdminSidebar from '../components/admin/AdminSidebar.jsx';
 import ProductList from '../components/admin/ProductList.jsx';
 import { Grid, Box, Button, Typography } from '@mui/material';
 
@@ -16,7 +16,7 @@ const AdminPage = () => {
   return (
     <Grid container sx={{ height: '100%' }}>
       <Grid item xs={2} sx={{ borderRight: '1px solid black' }}>
-        <UserSidebar />
+        <AdminSidebar />
       </Grid>
       <Grid item xs={10}>
         <Box>
