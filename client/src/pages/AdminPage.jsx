@@ -1,6 +1,6 @@
 // components for admin page
 import AdminSidebar from '../components/admin/AdminSidebar.jsx';
-import ProductList from '../components/admin/ProductList.jsx';
+import ProductList from '../components/admin/ManageProducts.jsx';
 import CreateProduct from '../components/admin/CreateProduct.jsx';
 
 import { Grid, Box, Button, Typography } from '@mui/material';
