@@ -8,11 +8,6 @@ const typeDefs = gql`
     roles: [String]
   }
 
-  type Size {
-    size: String
-    inStock: Boolean
-  }
-
   type Clothing {
     _id: ID
     name: String
@@ -20,18 +15,13 @@ const typeDefs = gql`
     category: String
     subtype: String
     price: Float
-    sizes: [Size]
+    sizes: [String]
     imageUrl: String
   }
 
   type Auth {
     token: ID!
     user: User
-  }
-
-  input SizeInput {
-    size: String
-    inStock: Boolean
   }
 
   type Query {
@@ -50,7 +40,7 @@ const typeDefs = gql`
       category: String!
       subtype: String!
       price: Float!
-      sizes: [SizeInput]!
+      sizes: [String]!
       imageUrl: String
     ): Clothing
     updateClothing(
@@ -60,7 +50,7 @@ const typeDefs = gql`
       category: String
       subtype: String
       price: Float
-      sizes: [SizeInput]
+      sizes: [String]
       imageUrl: String
     ): Clothing
     deleteClothing(clothingId: ID!): Clothing
