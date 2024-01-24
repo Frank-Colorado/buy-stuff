@@ -7,7 +7,6 @@ import {
   TextField,
   ToggleButtonGroup,
   ToggleButton,
-  Typography,
 } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { CREATE_PRODUCT } from '../../graphQL/mutations';
