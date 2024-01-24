@@ -35,7 +35,7 @@ export const ADD_CLOTHING = gql`
     $category: String!
     $subtype: String!
     $price: Float!
-    $sizes: [SizeInput]!
+    $sizes: [String]!
     $imageUrl: String
   ) {
     addClothing(
@@ -53,10 +53,7 @@ export const ADD_CLOTHING = gql`
       category
       subtype
       price
-      sizes {
-        size
-        inStock
-      }
+      sizes
       imageUrl
     }
   }
@@ -70,7 +67,7 @@ export const UPDATE_CLOTHING = gql`
     $category: String
     $subtype: String
     $price: Float
-    $sizes: [SizeInput]
+    $sizes: [String]
     $imageUrl: String
   ) {
     updateClothing(
@@ -89,10 +86,7 @@ export const UPDATE_CLOTHING = gql`
       category
       subtype
       price
-      sizes {
-        size
-        inStock
-      }
+      sizes
       imageUrl
     }
   }
@@ -107,10 +101,7 @@ export const DELETE_CLOTHING = gql`
       category
       subtype
       price
-      sizes {
-        size
-        inStock
-      }
+      sizes
       imageUrl
     }
   }

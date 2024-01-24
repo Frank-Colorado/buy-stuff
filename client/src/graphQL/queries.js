@@ -20,10 +20,7 @@ export const QUERY_ALL_CLOTHING = gql`
       category
       subtype
       price
-      sizes {
-        size
-        inStock
-      }
+      sizes
       imageUrl
     }
   }
@@ -38,10 +35,7 @@ export const QUERY_CLOTHING_BY_ID = gql`
       category
       subtype
       price
-      sizes {
-        size
-        inStock
-      }
+      sizes
       imageUrl
     }
   }
@@ -56,10 +50,7 @@ export const QUERY_CLOTHING_BY_CATEGORY = gql`
       category
       subtype
       price
-      sizes {
-        size
-        inStock
-      }
+      sizes
       imageUrl
     }
   }
