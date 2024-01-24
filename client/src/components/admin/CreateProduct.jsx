@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Box, Button, Modal } from '@mui/material';
+import { Snackbar } from '@mui/material';
 
 import ProductForm from '../forms/ProductForm';
 
 const CreateProduct = () => {
   const [open, setOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleOpen = (e) => {
     setOpen(true);
@@ -23,6 +25,18 @@ const CreateProduct = () => {
       >
         Add New Product
       </Button>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+        message="Product added!"
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: 'green',
+          },
+        }}
+      />
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -35,7 +49,7 @@ const CreateProduct = () => {
             bgcolor: 'white',
           }}
         >
-          <ProductForm />
+          <ProductForm snackBar={setSnackbarOpen} />
         </Box>
       </Modal>
     </Box>

@@ -45,7 +45,7 @@ const initialState = {
   sizes: ['XS'],
 };
 
-const ProductForm = () => {
+const ProductForm = ({ snackBar }) => {
   const [formState, setFormState] = useState(initialState);
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
@@ -71,6 +71,7 @@ const ProductForm = () => {
       });
       if (data) {
         // Here we would would use a snackbar to display a success message
+
         // Then we would update Redux state with the new product
         console.log(data);
       }
@@ -88,6 +89,7 @@ const ProductForm = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        width: '100%',
         mt: 5,
       }}
     >
@@ -277,6 +279,7 @@ const ProductForm = () => {
           Add Product
         </Button>
       </form>
+      <Button onClick={() => snackBar(true)}>Open</Button>
     </Box>
   );
 };
