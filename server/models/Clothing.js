@@ -23,19 +23,11 @@ const ClothingSchema = new Schema({
     type: Number,
     required: [true, 'Price is required'],
   },
-  sizes: [
-    {
-      size: {
-        type: String,
-        enum: ['XS', 'S', 'M', 'L', 'XL'],
-        required: [true, 'Size is required'],
-      },
-      inStock: {
-        type: Boolean,
-        default: true,
-      },
-    },
-  ],
+  sizes: {
+    type: [String],
+    enum: ['XS', 'S', 'M', 'L', 'XL'],
+    required: [true, 'Sizes are required'],
+  },
   imageUrl: {
     type: String,
   },
