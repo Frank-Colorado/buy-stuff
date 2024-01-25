@@ -13,14 +13,10 @@ const productSlice = createSlice({
       state.push(payload);
     },
     updateProducts: (state, { payload }) => {
-      console.log(payload);
       // Find the product in state and update it
       const index = state.findIndex((product) => product._id === payload._id);
-      console.log(index);
-
+      // Replace the product in state with the updated product
       state[index] = payload;
-
-      return state;
     },
     deleteProduct: (state, { payload }) => {
       // Remove the product from state

@@ -131,7 +131,6 @@ const ProductForm = ({ snackBar, edit, product }) => {
       });
       // If the mutation is successful
       if (data) {
-        console.log(data.updateClothing);
         // Then we update the product in the Redux store
         dispatch(updateProducts(data.updateClothing));
         // Display a snackbar to let the user know the product was updated successfully
