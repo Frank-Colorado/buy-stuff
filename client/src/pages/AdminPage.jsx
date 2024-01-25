@@ -52,7 +52,7 @@ const AdminPage = () => {
       >
         <AdminSidebar />
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={12} md={10}>
         {loading ? (
           <Box
             sx={{

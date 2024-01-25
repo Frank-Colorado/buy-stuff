@@ -1,9 +1,21 @@
 // My components
 import AdminProductCard from './AdminProductCard';
 // MUI components
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid, Select } from '@mui/material';
 // Redux hooks
 import { useSelector } from 'react-redux';
+
+// Options for the Type select input
+const typeOptions = [
+  'All',
+  'Shirt',
+  'Pants',
+  'Shorts',
+  'Outerwear',
+  'Top',
+  'Dress',
+  'Skirt',
+];
 
 const ManageProducts = () => {
   // Grab the products from the store
@@ -11,9 +23,53 @@ const ManageProducts = () => {
 
   return (
     <Box>
-      <Typography variant="h2" textAlign="center" sx={{ mt: 5 }}>
-        Manage Products
-      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+          mt: { xs: 3, md: 1 },
+        }}
+      >
+        <Box
+          sx={{
+            pl: 6,
+          }}
+        >
+          <Select
+            native
+            sx={{
+              height: '1.5rem',
+              width: '7.8rem',
+              ml: 1,
+            }}
+          >
+            <option value="">All</option>
+            <option value="Mens">Mens</option>
+            <option value="Womens">Womens</option>
+          </Select>
+          <Select
+            native
+            sx={{
+              height: '1.5rem',
+              width: '7.8rem',
+              ml: 1,
+            }}
+          >
+            {typeOptions.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </Select>
+        </Box>
+        <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+          <Typography variant="h2" sx={{ mr: { xs: 0, md: 30 } }}>
+            Manage Products
+          </Typography>
+        </Box>
+      </Box>
+
       <Grid
         container
         columnSpacing={6}
