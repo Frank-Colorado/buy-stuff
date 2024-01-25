@@ -1,4 +1,6 @@
+// React hooks
 import { useState } from 'react';
+// MUI components
 import {
   Box,
   Button,
@@ -8,9 +10,14 @@ import {
   ToggleButtonGroup,
   ToggleButton,
 } from '@mui/material';
+// GraphQL hooks
 import { useMutation } from '@apollo/client';
 import { CREATE_PRODUCT } from '../../graphQL/mutations';
+// Redux hooks
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../store/index';
 
+// Items for the subtype select menu
 const subtypes = [
   {
     value: 'Shirt',
@@ -35,6 +42,10 @@ const subtypes = [
   },
 ];
 
+// Items for the size toggle buttons
+const sizeButtons = ['XS', 'S', 'M', 'L', 'XL'];
+
+// Initial state for the form
 const initialState = {
   name: '',
   description: '',
@@ -46,40 +57,49 @@ const initialState = {
 };
 
 const ProductForm = ({ snackBar }) => {
+  // Form State
   const [formState, setFormState] = useState(initialState);
-
+  // Redux dispatch
+  const dispatch = useDispatch();
+  // GraphQL mutation
   const [createProduct] = useMutation(CREATE_PRODUCT);
-
+  // Handlers for the form inputs
   const handleChange = (e) => {
+    // Destructure the name and value properties off of event.target
     const { name, value } = e.target;
-
+    // Update the form state with the key being the input's name and the value being the input's value
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-
+  // Handler for the form submission
   const handleSubmit = async (e) => {
+    // Prevent the default behavior of form submission
     e.preventDefault();
-
+    // Destructure the price property off of formState
     const { price } = formState;
+    // Turn the price into a number so it can be stored in the database correctly
     const parsedPrice = parseFloat(price);
 
     try {
+      // Send the mutation request
       const { data } = await createProduct({
         variables: { ...formState, price: parsedPrice },
       });
+      // If the mutation is successful
       if (data) {
-        // Here we would would use a snackbar to display a success message
-
-        // Then we would update Redux state with the new product
-        console.log(data);
+        // Then we add the product to the Redux store
+        dispatch(addProduct(data.addClothing));
+        // Display a snackbar to let the user know the product was added successfully
+        snackBar(true);
       }
     } catch (err) {
       console.error(err);
       // Here we would would use a snackbar to display an error message
       return;
     }
+    // Reset the form state
     setFormState({ ...initialState });
   };
 
@@ -98,7 +118,7 @@ const ProductForm = ({ snackBar }) => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          width: '50%',
+          width: '75%',
           alignItems: 'center',
         }}
       >
@@ -141,12 +161,9 @@ const ProductForm = ({ snackBar }) => {
           }}
           sx={{
             mt: 1,
-            // remove arrows from number input
-            // disable browser arrows
             '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button':
               {
                 WebkitAppearance: 'none',
-                margin: 0,
               },
           }}
         />
@@ -232,7 +249,6 @@ const ProductForm = ({ snackBar }) => {
             ))}
           </TextField>
         </Box>
-
         <ToggleButtonGroup
           value={formState.sizes}
           onChange={(_event, newSizes) => {
@@ -248,26 +264,11 @@ const ProductForm = ({ snackBar }) => {
             mt: 3,
           }}
         >
-          <ToggleButton value="XS" sx={{ width: '75px' }}>
-            XS
-          </ToggleButton>
-          <ToggleButton
-            sx={{
-              width: '75px',
-            }}
-            value="S"
-          >
-            S
-          </ToggleButton>
-          <ToggleButton sx={{ width: '75px' }} value="M">
-            M
-          </ToggleButton>
-          <ToggleButton sx={{ width: '75px' }} value="L">
-            L
-          </ToggleButton>
-          <ToggleButton sx={{ width: '75px' }} value="XL">
-            XL
-          </ToggleButton>
+          {sizeButtons.map((size) => (
+            <ToggleButton key={size} value={size} sx={{ width: '75px' }}>
+              {size}
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
         <Button
           variant="contained"
@@ -279,7 +280,6 @@ const ProductForm = ({ snackBar }) => {
           Add Product
         </Button>
       </form>
-      <Button onClick={() => snackBar(true)}>Open</Button>
     </Box>
   );
 };
