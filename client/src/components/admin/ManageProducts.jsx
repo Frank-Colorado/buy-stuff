@@ -1,16 +1,15 @@
-import {
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-} from '@mui/material';
-
+// My components
 import AdminProductCard from './AdminProductCard';
+// MUI components
+import { Box, Typography, Grid } from '@mui/material';
+// Redux hooks
+import { useSelector } from 'react-redux';
 
 const ManageProducts = () => {
+  // Grab the products from the store
+  const products = useSelector((state) => state.product);
+  console.log(products);
+
   return (
     <Box>
       <Typography variant="h2" textAlign="center" sx={{ mt: 5 }}>
@@ -26,7 +25,11 @@ const ManageProducts = () => {
           px: { xs: 0, sm: 0, md: 5 },
         }}
       >
-        <AdminProductCard />
+        {products.map((product) => (
+          <Grid item xs={12} sm={6} md={6} lg={4} key={product._id}>
+            <AdminProductCard product={product} />
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );
