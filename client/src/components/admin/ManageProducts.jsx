@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AdminProductCard from './AdminProductCard';
 import FilterSelect from '../general/FilterSelect';
 // MUI components
-import { Box, Typography, Grid, Select } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 // Redux hooks
 import { useSelector } from 'react-redux';
 // Utils
@@ -28,6 +28,7 @@ const typeOptions = [
 const ManageProducts = () => {
   // State for the category filter
   const [category, setCategory] = useState('All');
+
   // State for the type filter
   const [type, setType] = useState('All');
 
@@ -37,9 +38,7 @@ const ManageProducts = () => {
   // Filter the products based on the category and type
   const filteredProducts = filterProducts(products, category, type);
 
-  console.log(filteredProducts);
-
-  // Handle change for the select inputs
+  // Handlers for the select input's onChange events
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
     setType('All');
@@ -75,7 +74,7 @@ const ManageProducts = () => {
           />
         </Box>
         <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-          <Typography variant="h2" sx={{ mr: { xs: 0, md: 30 } }}>
+          <Typography variant="h2" sx={{ mr: { xs: 0, md: 45 } }}>
             Manage Products
           </Typography>
         </Box>
@@ -91,11 +90,20 @@ const ManageProducts = () => {
           px: { xs: 0, sm: 0, md: 5 },
         }}
       >
-        {products.map((product) => (
-          <Grid item xs={12} sm={6} md={6} lg={4} key={product._id}>
-            <AdminProductCard product={product} />
-          </Grid>
-        ))}
+        {
+          // If there are no products, display a message
+          filteredProducts.length === 0 ? (
+            <Box sx={{ width: '100%', textAlign: 'center' }}>
+              <Typography variant="h4">No products found</Typography>
+            </Box>
+          ) : (
+            filteredProducts.map((product) => (
+              <Grid item xs={12} sm={6} md={6} lg={4} key={product._id}>
+                <AdminProductCard product={product} />
+              </Grid>
+            ))
+          )
+        }
       </Grid>
     </Box>
   );
