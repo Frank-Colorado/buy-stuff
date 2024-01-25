@@ -10,12 +10,14 @@ import {
   Typography,
   Modal,
 } from '@mui/material';
+// My components
+import DeleteProduct from './DeleteProduct';
 
 const AdminProductCard = ({ product }) => {
   // State for the deleteModal
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   // Destructor the product
-  const { name, price, imageUrl } = product;
+  const { name, price, imageUrl, _id } = product;
   return (
     <Box>
       <Card sx={{ display: 'flex' }}>
@@ -58,35 +60,8 @@ const AdminProductCard = ({ product }) => {
         </Box>
       </Card>
       <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(false)}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '25%',
-            height: '20%',
-            bgcolor: 'white',
-          }}
-        >
-          <Typography fontWeight="bold" sx={{ fontSize: '1.3rem' }}>
-            Are you sure you want to delete this product?
-          </Typography>
-          <Button variant="contained" color="error" sx={{ width: '40%', m: 2 }}>
-            Delete
-          </Button>
-          <Button
-            onClick={() => setOpenDeleteModal(false)}
-            variant="contained"
-            color="primary"
-            sx={{ width: '40%' }}
-          >
-            No
-          </Button>
+        <Box>
+          <DeleteProduct product={_id} setModal={setOpenDeleteModal} />
         </Box>
       </Modal>
     </Box>
