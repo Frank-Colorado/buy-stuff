@@ -9,6 +9,7 @@ const RegisterPage = () => {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
+        height: 'calc(100vh - 10.5rem)',
       }}
     >
       <Box
