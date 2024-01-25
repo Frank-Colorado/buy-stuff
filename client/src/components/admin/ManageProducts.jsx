@@ -7,6 +7,8 @@ import FilterSelect from '../general/FilterSelect';
 import { Box, Typography, Grid, Select } from '@mui/material';
 // Redux hooks
 import { useSelector } from 'react-redux';
+// Utils
+import filterProducts from '../../utils/filter.js';
 
 // Options for the Category select input
 const categoryOptions = ['All', 'Mens', 'Womens'];
@@ -33,27 +35,9 @@ const ManageProducts = () => {
   const products = useSelector((state) => state.product);
 
   // Filter the products based on the category and type
-  const filterProducts = () => {
-    // First filter by category
-    let filteredProducts = products.filter((product) => {
-      if (category === 'All') {
-        return products;
-      } else {
-        return product.category === category;
-      }
-    });
-    // Then filter by type
-    filteredProducts = filteredProducts.filter((product) => {
-      if (type === 'All') {
-        return filteredProducts;
-      } else {
-        return product.subtype === type;
-      }
-    });
-    return filteredProducts;
-  };
+  const filteredProducts = filterProducts(products, category, type);
 
-  console.log(filterProducts());
+  console.log(filteredProducts);
 
   // Handle change for the select inputs
   const handleCategoryChange = (e) => {
