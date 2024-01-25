@@ -1,9 +1,15 @@
+// React Hooks
+import { useState } from 'react';
 // My components
 import AdminProductCard from './AdminProductCard';
+import FilterSelect from '../general/FilterSelect';
 // MUI components
 import { Box, Typography, Grid, Select } from '@mui/material';
 // Redux hooks
 import { useSelector } from 'react-redux';
+
+// Options for the Category select input
+const categoryOptions = ['All', 'Mens', 'Womens'];
 
 // Options for the Type select input
 const typeOptions = [
@@ -18,8 +24,45 @@ const typeOptions = [
 ];
 
 const ManageProducts = () => {
+  // State for the category filter
+  const [category, setCategory] = useState('All');
+  // State for the type filter
+  const [type, setType] = useState('All');
+
   // Grab the products from the store
   const products = useSelector((state) => state.product);
+
+  // Filter the products based on the category and type
+  const filterProducts = () => {
+    // First filter by category
+    let filteredProducts = products.filter((product) => {
+      if (category === 'All') {
+        return products;
+      } else {
+        return product.category === category;
+      }
+    });
+    // Then filter by type
+    filteredProducts = filteredProducts.filter((product) => {
+      if (type === 'All') {
+        return filteredProducts;
+      } else {
+        return product.subtype === type;
+      }
+    });
+    return filteredProducts;
+  };
+
+  console.log(filterProducts());
+
+  // Handle change for the select inputs
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+    setType('All');
+  };
+  const handleTypeChange = (e) => {
+    setType(e.target.value);
+  };
 
   return (
     <Box>
@@ -36,32 +79,16 @@ const ManageProducts = () => {
             pl: 6,
           }}
         >
-          <Select
-            native
-            sx={{
-              height: '1.5rem',
-              width: '7.8rem',
-              ml: 1,
-            }}
-          >
-            <option value="">All</option>
-            <option value="Mens">Mens</option>
-            <option value="Womens">Womens</option>
-          </Select>
-          <Select
-            native
-            sx={{
-              height: '1.5rem',
-              width: '7.8rem',
-              ml: 1,
-            }}
-          >
-            {typeOptions.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </Select>
+          <FilterSelect
+            state={category}
+            handleState={handleCategoryChange}
+            options={categoryOptions}
+          />
+          <FilterSelect
+            state={type}
+            handleState={handleTypeChange}
+            options={typeOptions}
+          />
         </Box>
         <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
           <Typography variant="h2" sx={{ mr: { xs: 0, md: 30 } }}>
