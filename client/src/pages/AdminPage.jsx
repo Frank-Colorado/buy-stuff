@@ -27,9 +27,10 @@ const AdminPage = () => {
   const dispatch = useDispatch();
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
 
-  // If data exists, dispatch the data to the store
   useEffect(() => {
+    // If data exists
     if (data) {
+      // Set the products in the store
       dispatch(setProducts(data.allClothing));
     }
   }, [data, dispatch]);

@@ -56,7 +56,7 @@ const initialState = {
   sizes: ['XS'],
 };
 
-const ProductForm = ({ snackBar }) => {
+const ProductForm = ({ snackBar, edit }) => {
   // Form State
   const [formState, setFormState] = useState(initialState);
   // Redux dispatch
@@ -270,15 +270,21 @@ const ProductForm = ({ snackBar }) => {
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          sx={{ mt: 1 }}
-          type="submit"
-        >
-          Add Product
-        </Button>
+        {edit ? (
+          <Button variant="contained" color="primary" fullWidth sx={{ mt: 1 }}>
+            Save Changes
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 1 }}
+            type="submit"
+          >
+            Add Product
+          </Button>
+        )}
       </form>
     </Box>
   );

@@ -33,7 +33,7 @@ const CreateProduct = () => {
         open={snackbarOpen}
         autoHideDuration={6000}
         onClose={() => setSnackbarOpen(false)}
-        message="Product added!"
+        message="Product Added Successfully!"
         sx={{
           '& .MuiSnackbarContent-root': {
             backgroundColor: 'green',
