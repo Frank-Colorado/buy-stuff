@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
+import CollectionsPage from './pages/CollectionsPage.jsx';
 // Auth
 import Auth from './utils/auth.js';
 
@@ -31,6 +32,10 @@ const App = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route
+              path="/collections/:category"
+              element={<CollectionsPage />}
+            />
           </Routes>
         </div>
         <Footer />
