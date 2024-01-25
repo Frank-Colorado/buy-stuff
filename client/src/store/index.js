@@ -4,6 +4,7 @@ import { userReducer, setUser } from './slices/userSlice';
 import {
   productReducer,
   setProducts,
+  addProduct,
   updateProducts,
   deleteProduct,
 } from './slices/productSlice';
@@ -18,4 +19,4 @@ const store = configureStore({
 setupListeners(store.dispatch);
 
 export default store;
-export { setUser, setProducts, updateProducts, deleteProduct };
+export { setUser, setProducts, addProduct, updateProducts, deleteProduct };

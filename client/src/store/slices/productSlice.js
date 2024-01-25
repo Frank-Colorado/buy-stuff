@@ -8,6 +8,10 @@ const productSlice = createSlice({
       // Replace the current state with the new array of products
       return payload;
     },
+    addProduct: (state, { payload }) => {
+      // Add the new product to the end of the array
+      state.push(payload);
+    },
     updateProducts: (state, { payload }) => {
       // Find the index of the product that needs to be udpated
       const index = state.findIndex((product) => product._id === payload._id);
@@ -21,6 +25,6 @@ const productSlice = createSlice({
   },
 });
 
-export const { setProducts, updateProducts, deleteProduct } =
+export const { setProducts, addProduct, updateProducts, deleteProduct } =
   productSlice.actions;
 export const productReducer = productSlice.reducer;
