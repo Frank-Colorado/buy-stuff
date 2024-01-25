@@ -41,7 +41,14 @@ const AdminPage = () => {
         minHeight: 'calc(100vh - 10.5rem)',
       }}
     >
-      <Grid item xs={2} sx={{ borderRight: '1px solid black' }}>
+      <Grid
+        item
+        xs={2}
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          borderRight: '1px solid black',
+        }}
+      >
         <AdminSidebar />
       </Grid>
       <Grid item xs={10}>
