@@ -1,20 +1,24 @@
+// React hooks
 import { useState } from 'react';
-import { Box, Button, Modal } from '@mui/material';
-import { Snackbar } from '@mui/material';
-
+// MUI components
+import { Box, Button, Modal, Snackbar } from '@mui/material';
+// My components
 import ProductForm from '../forms/ProductForm';
 
 const CreateProduct = () => {
+  // State for modal and snackbar
   const [open, setOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  const handleOpen = (e) => {
+  // Handlers for modal
+  const handleOpen = (_e) => {
     setOpen(true);
   };
 
-  const handleClose = (e) => {
+  const handleClose = (_e) => {
     setOpen(false);
   };
+
   return (
     <Box>
       <Button
@@ -25,7 +29,6 @@ const CreateProduct = () => {
       >
         Add New Product
       </Button>
-
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
