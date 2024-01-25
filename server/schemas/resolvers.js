@@ -88,58 +88,56 @@ const resolvers = {
     addClothing: async (_root, args, context) => {
       // if the context has a 'user' property that contains the 'admin' role in its 'roles' array
       // then allow the mutation to execute
-      // if (context.user.roles.includes('admin')) {
-      try {
-        const clothing = await Clothing.create({ ...args });
-        return clothing;
-      } catch (err) {
-        console.log('Error adding clothing', err);
-        throw new Error('Failed to create clothing item');
+      if (context.user.roles.includes('admin')) {
+        try {
+          const clothing = await Clothing.create({ ...args });
+          return clothing;
+        } catch (err) {
+          console.log('Error adding clothing', err);
+          throw new Error('Failed to create clothing item');
+        }
       }
-      // }
-      // // if the user is not an admin, throw an error
-      // throw new AuthenticationError('Not authorized');
+      // if the user is not an admin, throw an error
+      throw new AuthenticationError('Not authorized');
     },
     // Mutation for updating a specific clothing item using its _id
     updateClothing: async (_root, args, context) => {
       const { clothingId } = args;
       // if the context has a 'user' property that contains the 'admin' role in its 'roles' array
       // then allow the mutation to execute
-      // This will be commented out for now to not interfere with the front end
-      // if (context.user.roles.includes('admin')) {
-      try {
-        const clothing = await Clothing.findByIdAndUpdate(
-          clothingId,
-          {
-            ...args,
-          },
-          { new: true }
-        );
-        return clothing;
-      } catch (err) {
-        console.log('Error updating clothing', err);
-        throw new Error('Failed to update clothing item');
+      if (context.user.roles.includes('admin')) {
+        try {
+          const clothing = await Clothing.findByIdAndUpdate(
+            clothingId,
+            {
+              ...args,
+            },
+            { new: true }
+          );
+          return clothing;
+        } catch (err) {
+          console.log('Error updating clothing', err);
+          throw new Error('Failed to update clothing item');
+        }
       }
-      // }
-      // // if the user is not an admin, throw an error
-      // throw new AuthenticationError('Not authorized');
+      // if the user is not an admin, throw an error
+      throw new AuthenticationError('Not authorized');
     },
     // Mutation for deleting a specific clothing item using its _id
     deleteClothing: async (_root, { clothingId }, context) => {
       // if the context has a 'user' property that contains the 'admin' role in its 'roles' array
       // then allow the mutation to execute
-      // This will be commented out for now to not interfere with the front end
-      // if (context.user.roles.includes('admin')) {
-      try {
-        const clothing = await Clothing.findByIdAndDelete(clothingId);
-        return clothing;
-      } catch (err) {
-        console.log('Error deleting clothing', err);
-        throw new Error('Failed to delete clothing item');
+      if (context.user.roles.includes('admin')) {
+        try {
+          const clothing = await Clothing.findByIdAndDelete(clothingId);
+          return clothing;
+        } catch (err) {
+          console.log('Error deleting clothing', err);
+          throw new Error('Failed to delete clothing item');
+        }
       }
-      // }
-      // // if the user is not an admin, throw an error
-      // throw new AuthenticationError('Not authorized');
+      // if the user is not an admin, throw an error
+      throw new AuthenticationError('Not authorized');
     },
   },
 };
