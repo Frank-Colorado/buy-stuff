@@ -13,10 +13,14 @@ const productSlice = createSlice({
       state.push(payload);
     },
     updateProducts: (state, { payload }) => {
-      // Find the index of the product that needs to be udpated
+      console.log(payload);
+      // Find the product in state and update it
       const index = state.findIndex((product) => product._id === payload._id);
-      // Update the product in state
+      console.log(index);
+
       state[index] = payload;
+
+      return state;
     },
     deleteProduct: (state, { payload }) => {
       // Remove the product from state

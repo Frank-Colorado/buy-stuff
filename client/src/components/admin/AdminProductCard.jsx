@@ -105,9 +105,7 @@ const AdminProductCard = ({ product }) => {
             bgcolor: 'white',
           }}
         >
-          <Typography>
-            <ProductForm edit snackBar={setSnackbarOpen} product={product} />
-          </Typography>
+          <ProductForm edit snackBar={setSnackbarOpen} product={product} />
         </Box>
       </Modal>
     </Box>

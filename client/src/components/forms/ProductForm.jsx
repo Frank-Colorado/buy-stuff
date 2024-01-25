@@ -13,9 +13,11 @@ import {
 // GraphQL hooks
 import { useMutation } from '@apollo/client';
 import { CREATE_PRODUCT } from '../../graphQL/mutations';
+import { UPDATE_PRODUCT } from '../../graphQL/mutations';
 // Redux hooks
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../store/index';
+import { updateProducts } from '../../store/index';
 
 // Items for the subtype select menu
 const subtypes = [
@@ -56,13 +58,16 @@ const initialState = {
   sizes: ['XS'],
 };
 
-const ProductForm = ({ snackBar, edit }) => {
+const ProductForm = ({ snackBar, edit, product }) => {
   // Form State
-  const [formState, setFormState] = useState(initialState);
+  const [formState, setFormState] = useState(
+    edit ? { ...product } : initialState
+  );
   // Redux dispatch
   const dispatch = useDispatch();
-  // GraphQL mutation
+  // GraphQL mutations
   const [createProduct] = useMutation(CREATE_PRODUCT);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
   // Handlers for the form inputs
   const handleChange = (e) => {
     // Destructure the name and value properties off of event.target
@@ -85,7 +90,10 @@ const ProductForm = ({ snackBar, edit }) => {
     try {
       // Send the mutation request
       const { data } = await createProduct({
-        variables: { ...formState, price: parsedPrice },
+        variables: {
+          ...formState,
+          price: parsedPrice,
+        },
       });
       // If the mutation is successful
       if (data) {
@@ -101,6 +109,39 @@ const ProductForm = ({ snackBar, edit }) => {
     }
     // Reset the form state
     setFormState({ ...initialState });
+  };
+
+  // Handler for updating a product
+  const handleUpdate = async (e) => {
+    // Prevent the default behavior of form submission
+    e.preventDefault();
+    // Destructure the price property off of formState
+    const { price } = formState;
+    // Turn the price into a number so it can be stored in the database correctly
+    const parsedPrice = parseFloat(price);
+
+    try {
+      // Send the mutation request
+      const { data } = await updateProduct({
+        variables: {
+          ...formState,
+          price: parsedPrice,
+          clothingId: product._id,
+        },
+      });
+      // If the mutation is successful
+      if (data) {
+        console.log(data.updateClothing);
+        // Then we update the product in the Redux store
+        dispatch(updateProducts(data.updateClothing));
+        // Display a snackbar to let the user know the product was updated successfully
+        snackBar(true);
+      }
+    } catch (err) {
+      console.log({ err });
+      // Here we would would use a snackbar to display an error message
+      return;
+    }
   };
 
   return (
@@ -271,7 +312,13 @@ const ProductForm = ({ snackBar, edit }) => {
           ))}
         </ToggleButtonGroup>
         {edit ? (
-          <Button variant="contained" color="primary" fullWidth sx={{ mt: 1 }}>
+          <Button
+            onClick={handleUpdate}
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 1 }}
+          >
             Save Changes
           </Button>
         ) : (

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 const ManageProducts = () => {
   // Grab the products from the store
   const products = useSelector((state) => state.product);
+  console.log(products);
 
   return (
     <Box>

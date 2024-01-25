@@ -108,9 +108,13 @@ const resolvers = {
       // This will be commented out for now to not interfere with the front end
       // if (context.user.roles.includes('admin')) {
       try {
-        const clothing = await Clothing.findByIdAndUpdate(clothingId, {
-          ...args,
-        });
+        const clothing = await Clothing.findByIdAndUpdate(
+          clothingId,
+          {
+            ...args,
+          },
+          { new: true }
+        );
         return clothing;
       } catch (err) {
         console.log('Error updating clothing', err);
