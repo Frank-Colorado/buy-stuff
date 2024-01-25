@@ -42,12 +42,15 @@ const DeleteProduct = ({ product, setModal }) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '25%',
-        height: '20%',
+        width: { xs: '100%', md: '60%', lg: '25%' },
+        height: { xs: '30%', md: '25%' },
         bgcolor: 'white',
       }}
     >
-      <Typography fontWeight="bold" sx={{ fontSize: '1.3rem' }}>
+      <Typography
+        fontWeight="bold"
+        sx={{ fontSize: { xs: '1rem', md: '1.3rem' } }}
+      >
         Are you sure you want to delete this product?
       </Typography>
       <Button

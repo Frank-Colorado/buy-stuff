@@ -24,7 +24,7 @@ const CreateProduct = () => {
       <Button
         variant="contained"
         color="primary"
-        sx={{ mt: 5, ml: 5 }}
+        sx={{ mt: 5, ml: 7 }}
         onClick={handleOpen}
       >
         Add New Product
