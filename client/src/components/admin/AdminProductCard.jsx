@@ -100,8 +100,8 @@ const AdminProductCard = ({ product }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '45%',
-            height: '55%',
+            width: { xs: '100%', sm: '100%', md: '75%', lg: '45%' },
+            height: { xs: '75%', sm: '75%', md: '80%', lg: '60%' },
             bgcolor: 'white',
           }}
         >
