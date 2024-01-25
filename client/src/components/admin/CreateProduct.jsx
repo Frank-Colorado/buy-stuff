@@ -20,11 +20,17 @@ const CreateProduct = () => {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: { xs: 'center', md: 'flex-start' },
+      }}
+    >
       <Button
         variant="contained"
         color="primary"
-        sx={{ mt: 5, ml: 7 }}
+        sx={{ mt: 5, ml: { xs: 0, md: 7 } }}
         onClick={handleOpen}
       >
         Add New Product

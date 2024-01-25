@@ -53,13 +53,15 @@ const ManageProducts = () => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+          flexDirection: { xs: 'column', md: 'row' },
           mt: { xs: 3, md: 1 },
         }}
       >
         <Box
           sx={{
-            pl: 6,
+            ml: { xs: 0, md: 6, lg: 0 },
+            mb: { xs: 2, md: 0 },
+            pl: { xs: 0, lg: 6 },
           }}
         >
           <FilterSelect
@@ -74,7 +76,7 @@ const ManageProducts = () => {
           />
         </Box>
         <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-          <Typography variant="h2" sx={{ mr: { xs: 0, md: 45 } }}>
+          <Typography variant="h2" sx={{ mr: { xs: 0, lg: 45 } }}>
             Manage Products
           </Typography>
         </Box>
@@ -87,7 +89,7 @@ const ManageProducts = () => {
         sx={{
           mt: 2,
           mb: 5,
-          px: { xs: 0, sm: 0, md: 5 },
+          px: { xs: 0, md: 5 },
         }}
       >
         {
