@@ -1,6 +1,7 @@
 // React hooks
 import { useParams } from 'react-router-dom';
 // My components
+import BrowseProducts from '../components/collections/BrowseProducts';
 // MUI components
 import { Grid, Box, Typography, CircularProgress } from '@mui/material';
 // GraphQL hooks
@@ -14,8 +15,6 @@ const CollectionsPage = () => {
   });
 
   const products = data?.clothingByCategory || [];
-
-  console.log(products);
 
   return (
     <Grid container sx={{ minHeight: 'calc(100vh - 10.5rem)' }}>
@@ -39,14 +38,17 @@ const CollectionsPage = () => {
             <CircularProgress />
           </Box>
         ) : (
-          <Box
-            sx={{
-              width: '100%',
-            }}
-          >
-            <Typography variant="h2" align="start">
-              Browse {category}'s Collection
-            </Typography>
+          <Box>
+            <Box
+              sx={{
+                width: '100%',
+              }}
+            >
+              <Typography variant="h2" align="left">
+                Browse {category}'s Collection
+              </Typography>
+            </Box>
+            <BrowseProducts products={products} />
           </Box>
         )}
       </Grid>
