@@ -19,6 +19,11 @@ const typeDefs = gql`
     imageUrl: String
   }
 
+  type ClothingResult {
+    clothing: [Clothing]
+    count: Int
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -28,7 +33,11 @@ const typeDefs = gql`
     me: User
     allClothing: [Clothing]
     clothingById(clothingId: ID!): Clothing
-    clothingByCategory(category: String!, limit: Int!, offset: Int!): [Clothing]
+    clothingByCategory(
+      category: String!
+      limit: Int!
+      offset: Int!
+    ): ClothingResult
   }
 
   type Mutation {

@@ -46,8 +46,11 @@ const client = new ApolloClient({
         fields: {
           clothingByCategory: {
             keyArgs: false,
-            merge(existing = [], incoming) {
-              return [...existing, ...incoming];
+            merge(existing = { clothing: [], count: 0 }, incoming) {
+              return {
+                clothing: [...existing.clothing, ...incoming.clothing],
+                count: incoming.count,
+              };
             },
           },
         },

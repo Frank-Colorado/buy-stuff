@@ -38,10 +38,15 @@ const resolvers = {
     // Get all clothing items by category
     clothingByCategory: async (_root, { category, limit = 1, offset = 0 }) => {
       try {
-        const clothing = await Clothing.find({ category })
-          .limit(limit)
-          .skip(offset);
-        return clothing;
+        // use Promise.all to run both queries at the same time
+        const [count, clothing] = await Promise.all([
+          // Find the count of all clothing items in the category
+          Clothing.find({ category }).countDocuments(),
+          // Find all clothing items in the category and limit the results
+          Clothing.find({ category }).skip(offset).limit(limit),
+        ]);
+        // return the clothing items and the count of all clothing items in the category
+        return { clothing, count };
       } catch (err) {
         console.log(err);
       }

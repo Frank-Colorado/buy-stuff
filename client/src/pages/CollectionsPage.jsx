@@ -25,17 +25,20 @@ const CollectionsPage = () => {
   });
 
   // If there is data, set products to the data, otherwise set it to an empty array
-  const products = data?.clothingByCategory || [];
-
-  console.log(products);
+  const products = data?.clothingByCategory.clothing || [];
 
   // useEffect hook to check if there are more products to load
   useEffect(() => {
     if (data) {
-      // If there number of products is less than the limit
-      // then there are no more products to load
-      // so set hasMore to false
-      setHasMore(data.clothingByCategory.length === limit);
+      // If the current number of products is less than the total number of products
+      // then there are more products to load
+      if (
+        data.clothingByCategory.clothing.length < data.clothingByCategory.count
+      ) {
+        setHasMore(true);
+      } else {
+        setHasMore(false);
+      }
     }
   }, [data, limit, page]);
 
