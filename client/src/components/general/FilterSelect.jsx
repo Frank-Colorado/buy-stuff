@@ -10,7 +10,7 @@ const FilterSelect = ({ state, handleState, options }) => {
       sx={{
         height: '1.5rem',
         width: '7.8rem',
-        ml: 1,
+        mr: 1,
       }}
     >
       {options.map((option) => (

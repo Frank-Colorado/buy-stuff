@@ -30,7 +30,7 @@ const CreateProduct = () => {
       <Button
         variant="contained"
         color="primary"
-        sx={{ mt: 5, ml: { xs: 0, md: 7 } }}
+        sx={{ mt: 5, ml: { xs: 0, md: 6 } }}
         onClick={handleOpen}
       >
         Add New Product
