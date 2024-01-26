@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 import CollectionsPage from './pages/CollectionsPage.jsx';
+import ProductPage from './pages/ProductPage.jsx';
 // Auth
 import Auth from './utils/auth.js';
 
@@ -36,6 +37,7 @@ const App = () => {
               path="/collections/:category"
               element={<CollectionsPage />}
             />
+            <Route path="/products/:id" element={<ProductPage />} />
           </Routes>
         </div>
         <Footer />
