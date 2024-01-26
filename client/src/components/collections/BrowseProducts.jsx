@@ -44,22 +44,24 @@ const BrowseProducts = ({ products }) => {
       </Box>
       <Grid
         container
+        spacing={2}
         sx={{
           mt: 2,
           mb: 5,
-          bgcolor: 'blue',
         }}
       >
         {
           // If there are no products, display a message
           filteredProducts.length === 0 ? (
             <Box sx={{ width: '100%', textAlign: 'center' }}>
-              <Typography variant="h4">No products found</Typography>
+              <Typography variant="h4">
+                Sorry, no products match your filter.
+              </Typography>
             </Box>
           ) : (
             // Otherwise, display the products
             filteredProducts.map((product) => (
-              <Grid key={product._id} item xs={12} sm={6} md={4}>
+              <Grid key={product._id} item xs={12} sm={6} md={4} lg={3}>
                 <ProductCard product={product} />
               </Grid>
             ))

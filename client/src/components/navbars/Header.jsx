@@ -19,7 +19,7 @@ const Header = () => {
             Odachi
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 7 }}>
+          <Box sx={{ display: 'flex', mr: 7 }}>
             {isLoggedIn ? (
               <Button
                 onClick={Auth.logout}

@@ -22,8 +22,7 @@ const CollectionsPage = () => {
         item
         xs={12}
         sx={{
-          mt: 4,
-          px: 10,
+          px: { xs: 0, md: 10 },
         }}
       >
         {loading ? (
@@ -44,7 +43,7 @@ const CollectionsPage = () => {
                 width: '100%',
               }}
             >
-              <Typography variant="h2" align="left" sx={{ mb: 2 }}>
+              <Typography variant="h2" align="left" sx={{ my: 2 }}>
                 Browse {category}'s Collection
               </Typography>
             </Box>
