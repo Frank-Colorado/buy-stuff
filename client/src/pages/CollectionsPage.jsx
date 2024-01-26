@@ -44,7 +44,7 @@ const CollectionsPage = () => {
               width: '100%',
             }}
           >
-            <Typography variant="h2" sx={{ textAlign: 'start' }}>
+            <Typography variant="h2" align="start">
               Browse {category}'s Collection
             </Typography>
           </Box>
