@@ -36,9 +36,11 @@ const resolvers = {
       }
     },
     // Get all clothing items by category
-    clothingByCategory: async (_root, { category }) => {
+    clothingByCategory: async (_root, { category, limit = 1, offset = 0 }) => {
       try {
-        const clothing = await Clothing.find({ category });
+        const clothing = await Clothing.find({ category })
+          .limit(limit)
+          .skip(offset);
         return clothing;
       } catch (err) {
         console.log(err);

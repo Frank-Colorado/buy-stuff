@@ -42,8 +42,8 @@ export const QUERY_PRODUCT_BY_ID = gql`
 `;
 
 export const QUERY_PRODUCT_BY_CATEGORY = gql`
-  query clothingByCategory($category: String!) {
-    clothingByCategory(category: $category) {
+  query clothingByCategory($category: String!, $limit: Int!, $offset: Int!) {
+    clothingByCategory(category: $category, limit: $limit, offset: $offset) {
       _id
       name
       description

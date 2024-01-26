@@ -28,7 +28,7 @@ const typeDefs = gql`
     me: User
     allClothing: [Clothing]
     clothingById(clothingId: ID!): Clothing
-    clothingByCategory(category: String!): [Clothing]
+    clothingByCategory(category: String!, limit: Int!, offset: Int!): [Clothing]
   }
 
   type Mutation {
