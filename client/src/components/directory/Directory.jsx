@@ -12,8 +12,8 @@ const Directory = () => {
           height: '100%',
         }}
       >
-        <DirectoryImage image={WomensPhoto} title="womens" />
-        <DirectoryImage image={MensPhoto} title="mens" />
+        <DirectoryImage image={WomensPhoto} title="Womens" />
+        <DirectoryImage image={MensPhoto} title="Mens" />
       </div>
     </div>
   );

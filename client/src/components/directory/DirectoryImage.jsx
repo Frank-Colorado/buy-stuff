@@ -28,7 +28,7 @@ const DirectoryImage = ({ image, title }) => {
       >
         <Typography
           component={Link}
-          to={`/${title}`}
+          to={`/collections/${title}`}
           variant="button"
           sx={{
             fontWeight: 'bold',
