@@ -17,9 +17,9 @@ const ProductPage = () => {
     variables: { clothingId: id },
   });
 
+  // Get the product from the data
+  // If there is no product, set it to an empty object
   const product = data?.clothingById || {};
-
-  console.log(product);
 
   return (
     <Grid
