@@ -1,5 +1,7 @@
 // React Router hooks
 import { useParams } from 'react-router-dom';
+// My components
+import ProductDetails from '../components/product/ProductDetails';
 // MUI components
 import { Grid, Box, Typography, CircularProgress, Button } from '@mui/material';
 // GraphQL hooks
@@ -40,47 +42,13 @@ const ProductPage = () => {
         </Box>
       ) : (
         <Grid item xs={12} md={10} lg={8}>
-          <Grid
-            container
-            sx={{
-              mt: 5,
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-            }}
-          >
-            <Grid item md={5}>
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                style={{ width: '100%', border: '1px solid black' }}
-              />
-            </Grid>
-            <Grid item md={7}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  height: '100%',
-                }}
-              >
-                <Box>
-                  <Typography variant="h4">{product.name}</Typography>
-                  <Typography variant="h5">${product.price}</Typography>
-                </Box>
-                <Box sx={{ width: '50%' }}>
-                  <Button variant="contained" color="primary" fullWidth>
-                    Add to Cart
-                  </Button>
-                </Box>
-              </Box>
-            </Grid>
-            <Box>
-              <Typography variant="h4">Description</Typography>
-              <Typography variant="body1">{product.description}</Typography>
+          {Object.keys(product).length === 0 ? (
+            <Box sx={{ textAlign: 'center', mt: 10 }}>
+              <Typography variant="h4">Sorry, No Product Found.</Typography>
             </Box>
-          </Grid>
+          ) : (
+            <ProductDetails product={product} />
+          )}
         </Grid>
       )}
     </Grid>
