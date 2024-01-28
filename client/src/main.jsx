@@ -45,7 +45,9 @@ const client = new ApolloClient({
       Query: {
         fields: {
           clothingByCategory: {
-            keyArgs: false,
+            // Don't cache separate results based on
+            // limit and offset arguments.
+            keyArgs: ['category'],
             merge(existing = { clothing: [], count: 0 }, incoming) {
               return {
                 clothing: [...existing.clothing, ...incoming.clothing],
