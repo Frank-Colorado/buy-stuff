@@ -15,6 +15,7 @@ const CollectionsPage = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
   const [hasMore, setHasMore] = useState(true);
+  const [filter, setFilter] = useState('All');
 
   // Get the category from the URL
   const { category } = useParams();
@@ -29,6 +30,11 @@ const CollectionsPage = () => {
 
   // useEffect hook to check if there are more products to load
   useEffect(() => {
+    // If the filter is not 'All', then there are no more products to load
+    if (filter !== 'All') {
+      setHasMore(false);
+      return;
+    }
     if (data) {
       // If the current number of products is less than the total number of products
       // then there are more products to load
@@ -40,7 +46,7 @@ const CollectionsPage = () => {
         setHasMore(false);
       }
     }
-  }, [data, limit, page]);
+  }, [data, limit, page, filter]);
 
   // Pagination handler
   const handleLoadMore = async () => {
@@ -53,6 +59,11 @@ const CollectionsPage = () => {
     });
     // Then we update the page number
     setPage((prevPage) => prevPage + 1);
+  };
+
+  // Handler for the select input's onChange event
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
   };
 
   return (
@@ -86,7 +97,11 @@ const CollectionsPage = () => {
                 Browse {category}'s Collection
               </Typography>
             </Box>
-            <BrowseProducts products={products} />
+            <BrowseProducts
+              products={products}
+              filter={filter}
+              handleFilter={handleFilterChange}
+            />
           </Box>
         )}
         {hasMore && (

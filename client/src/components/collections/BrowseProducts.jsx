@@ -20,17 +20,9 @@ const typeOptions = [
   'Skirt',
 ];
 
-const BrowseProducts = ({ products }) => {
-  // State for the type filter
-  const [type, setType] = useState('All');
-
+const BrowseProducts = ({ products, filter, handleFilter }) => {
   // Filter the products based on the type
-  const filteredProducts = filterProducts(products, 'All', type);
-
-  // Handler for the select input's onChange event
-  const handleTypeChange = (e) => {
-    setType(e.target.value);
-  };
+  const filteredProducts = filterProducts(products, 'All', filter);
 
   return (
     <Box>
@@ -38,8 +30,8 @@ const BrowseProducts = ({ products }) => {
         <FilterSelect
           label="Type"
           options={typeOptions}
-          value={type}
-          handleState={handleTypeChange}
+          value={filter}
+          handleState={handleFilter}
         />
       </Box>
       <Grid
