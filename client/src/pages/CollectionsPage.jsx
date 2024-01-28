@@ -61,7 +61,7 @@ const CollectionsPage = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  // Handler for the select input's onChange event
+  // Handler for the filter for the products
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };

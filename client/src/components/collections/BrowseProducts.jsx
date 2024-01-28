@@ -1,5 +1,3 @@
-// React hooks
-import { useState } from 'react';
 // My components
 import ProductCard from './ProductCard';
 import FilterSelect from '../general/FilterSelect';
