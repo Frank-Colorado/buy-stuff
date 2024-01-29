@@ -39,7 +39,7 @@ const Cart = ({ handleCartClose }) => {
         }}
       >
         {cart.length > 0 ? (
-          cart.map((item) => <CartItem key={item.id} item={item} />)
+          cart.map((item) => <CartItem key={item.cartId} item={item} />)
         ) : (
           <Box
             sx={{

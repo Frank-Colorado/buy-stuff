@@ -1,8 +1,10 @@
-// React hooks
-import { useState } from 'react';
 // Redux hooks
 import { useDispatch } from 'react-redux';
-import { removeItem } from '../../store/slices/cartSlice';
+import {
+  removeItem,
+  incrementItem,
+  decrementItem,
+} from '../../store/slices/cartSlice';
 // MUI components
 import {
   Box,
@@ -25,12 +27,12 @@ const CartItem = ({ item: { cartId, image, name, size, price, quantity } }) => {
   };
 
   const handleQuantityIncrement = () => {
-    setQuantityState(quantityState + 1);
+    dispatch(incrementItem(cartId));
   };
 
   const handleQuantityDecrement = () => {
-    if (quantityState > 1) {
-      setQuantityState(quantityState - 1);
+    if (quantity > 1) {
+      dispatch(decrementItem(cartId));
     }
   };
 
