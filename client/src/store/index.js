@@ -8,15 +8,31 @@ import {
   updateProducts,
   deleteProduct,
 } from './slices/productSlice';
+import {
+  cartReducer,
+  addItem,
+  removeItem,
+  clearCart,
+} from './slices/cartSlice';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     product: productReducer,
+    cart: cartReducer,
   },
 });
 
 setupListeners(store.dispatch);
 
 export default store;
-export { setUser, setProducts, addProduct, updateProducts, deleteProduct };
+export {
+  setUser,
+  setProducts,
+  addProduct,
+  updateProducts,
+  deleteProduct,
+  addItem,
+  removeItem,
+  clearCart,
+};
