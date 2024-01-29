@@ -1,5 +1,7 @@
 // React hooks
 import { useState } from 'react';
+// My components
+import Cart from './Cart';
 // MUI components
 import {
   Box,
@@ -8,9 +10,7 @@ import {
   Toolbar,
   Button,
   Drawer,
-  IconButton,
 } from '@mui/material';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 // React Router hooks
 import { Link } from 'react-router-dom';
 // Auth
@@ -92,24 +92,7 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       <Drawer open={openDrawer} anchor="right">
-        <Box sx={{ width: { xs: '75vw', md: '30vw', lg: '20vw' } }}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              px: 3,
-              py: 2,
-            }}
-          >
-            <Typography variant="h5" noWrap component="div">
-              Cart
-            </Typography>
-            <IconButton onClick={handleCloseDrawer}>
-              <CloseOutlinedIcon />
-            </IconButton>
-          </Box>
-        </Box>
+        <Cart handleCartClose={handleCloseDrawer} />
       </Drawer>
     </Box>
   );

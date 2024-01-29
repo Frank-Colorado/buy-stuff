@@ -21,8 +21,6 @@ const ProductDetails = ({ product }) => {
     setSelectedSize(newSize);
   };
 
-  console.log(product.sizes);
-
   return (
     <Grid
       container
