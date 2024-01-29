@@ -9,16 +9,39 @@ import {
   ToggleButtonGroup,
   ToggleButton,
 } from '@mui/material';
+// Redux hooks
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../store/index';
 
+// Array of size options
 const sizeOptions = ['XS', 'S', 'M', 'L', 'XL'];
 
 const ProductDetails = ({ product }) => {
+  // Redux dispatch setup
+  const dispatch = useDispatch();
+
   // State to keep track of the selected size
-  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
 
   // Handle the change of the selected size
-  const handleSizeChange = (event, newSize) => {
+  const handleSizeChange = (_event, newSize) => {
     setSelectedSize(newSize);
+  };
+
+  // Handle adding the item to the cart
+  const handleAddToCart = () => {
+    // Create a new item object to add to the cart
+    const newItem = {
+      cartId: `${product._id}-${selectedSize}`,
+      id: product._id,
+      image: product.imageUrl,
+      name: product.name,
+      price: product.price,
+      size: selectedSize,
+      quantity: 1,
+    };
+    // Dispatch the action to add the item to the cart
+    dispatch(addItem(newItem));
   };
 
   return (
@@ -82,7 +105,12 @@ const ProductDetails = ({ product }) => {
                 </ToggleButton>
               ))}
             </ToggleButtonGroup>
-            <Button variant="contained" color="primary" fullWidth>
+            <Button
+              onClick={handleAddToCart}
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
               Add to Cart
             </Button>
           </Box>
