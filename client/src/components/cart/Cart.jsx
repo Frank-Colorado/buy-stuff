@@ -3,10 +3,17 @@ import CartItem from './CartItem';
 // MUI components
 import { Box, Typography, Button, IconButton, Divider } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+// Redux hooks
+import { useSelector } from 'react-redux';
 
 const Cart = ({ handleCartClose }) => {
+  // Redux state
+  const cart = useSelector((state) => state.cart);
+
   return (
-    <Box sx={{ width: { xs: '75vw', md: '30vw', lg: '20vw' } }}>
+    <Box
+      sx={{ height: '100vh', width: { xs: '75vw', md: '30vw', lg: '20vw' } }}
+    >
       <Box
         sx={{
           display: 'flex',
@@ -14,7 +21,7 @@ const Cart = ({ handleCartClose }) => {
           alignItems: 'center',
           px: 3,
           py: 2,
-          height: '10vh',
+          height: '10%',
         }}
       >
         <Typography variant="h5" noWrap component="div">
@@ -26,14 +33,27 @@ const Cart = ({ handleCartClose }) => {
       </Box>
       <Divider />
       <Box
-        // If there is overflow, make the box scrollable and keep it from growing
         sx={{
-          maxHeight: '80vh',
-          minHeight: '80vh',
+          height: '80%',
           overflow: 'auto',
         }}
       >
-        <CartItem />
+        {cart.length > 0 ? (
+          cart.map((item) => <CartItem key={item.id} item={item} />)
+        ) : (
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%',
+            }}
+          >
+            <Typography variant="h6" sx={{ textAlign: 'center' }}>
+              Your cart is empty
+            </Typography>
+          </Box>
+        )}
       </Box>
       <Divider />
       <Box
@@ -45,7 +65,7 @@ const Cart = ({ handleCartClose }) => {
           bottom: 0,
           left: 0,
           right: 0,
-          height: '10vh',
+          height: '10%',
         }}
       >
         <Button

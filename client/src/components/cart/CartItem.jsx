@@ -11,7 +11,8 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-const CartItem = () => {
+const CartItem = ({ item }) => {
+  console.log(item);
   return (
     <Box sx={{ mt: 2, bgcolor: 'pink', height: '20vh' }}>
       <Card
