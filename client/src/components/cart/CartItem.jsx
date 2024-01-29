@@ -15,14 +15,13 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item: { cartId, image, name, size, price, quantity } }) => {
   // Redux dispatch setup
   const dispatch = useDispatch();
-  // Local state for now
-  const [quantityState, setQuantityState] = useState(item.quantity);
 
+  // Handle removing the item from the cart
   const handleRemoveItem = () => {
-    dispatch(removeItem(item.cartId));
+    dispatch(removeItem(cartId));
   };
 
   const handleQuantityIncrement = () => {
@@ -49,7 +48,7 @@ const CartItem = ({ item }) => {
           alt="cart image"
           sx={{ width: '35%', objectFit: 'contain' }}
           // placeholder image
-          src={item.image}
+          src={image}
         />
 
         <CardContent
@@ -69,13 +68,13 @@ const CartItem = ({ item }) => {
             }}
           >
             <Typography variant="h7" fontWeight="bold">
-              {item.name}
+              {name}
             </Typography>
             <Typography variant="h7" fontWeight="bold">
-              Size: {item.size}
+              Size: {size}
             </Typography>
             <Typography variant="h7" fontWeight="bold">
-              ${item.price}.00
+              ${price}.00
             </Typography>
           </Box>
           <Box
@@ -114,7 +113,7 @@ const CartItem = ({ item }) => {
                 fontWeight="bold"
                 align="center"
               >
-                {quantityState}
+                {quantity}
               </Typography>
               <IconButton
                 onClick={handleQuantityIncrement}

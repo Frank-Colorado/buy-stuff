@@ -12,6 +12,8 @@ import {
   cartReducer,
   addItem,
   removeItem,
+  incrementItem,
+  decrementItem,
   clearCart,
 } from './slices/cartSlice';
 
@@ -34,5 +36,7 @@ export {
   deleteProduct,
   addItem,
   removeItem,
+  incrementItem,
+  decrementItem,
   clearCart,
 };

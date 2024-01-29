@@ -12,6 +12,18 @@ const cartSlice = createSlice({
       // Remove the item from state
       return state.filter((item) => item.cartId !== payload);
     },
+    incrementItem: (state, { payload }) => {
+      // Find the item in state
+      const item = state.find((item) => item.cartId === payload);
+      // Increment the quantity
+      item.quantity++;
+    },
+    decrementItem: (state, { payload }) => {
+      // Find the item in state
+      const item = state.find((item) => item.cartId === payload);
+      // Decrement the quantity
+      item.quantity--;
+    },
     clearCart: (_state, _action) => {
       // Reset the cart to an empty array
       return [];
@@ -19,5 +31,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, incrementItem, decrementItem, clearCart } =
+  cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
