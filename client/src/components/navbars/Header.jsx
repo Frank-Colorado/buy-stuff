@@ -1,7 +1,7 @@
 // React hooks
 import { useState } from 'react';
 // My components
-import Cart from './Cart';
+import Cart from '../cart/Cart';
 // MUI components
 import {
   Box,
