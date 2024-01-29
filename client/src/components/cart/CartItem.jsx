@@ -12,15 +12,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 const CartItem = ({ item }) => {
-  console.log(item);
   return (
-    <Box sx={{ mt: 2, bgcolor: 'pink', height: '20vh' }}>
+    <Box sx={{ mt: 2, height: '23%', p: 2 }}>
       <Card
         sx={{
           display: 'flex',
           boxShadow: 'none',
           height: '100%',
-          p: 2,
         }}
       >
         <CardMedia
@@ -28,13 +26,14 @@ const CartItem = ({ item }) => {
           alt="cart image"
           sx={{ width: '35%', objectFit: 'contain' }}
           // placeholder image
-          src="https://via.placeholder.com/150"
+          src={item.image}
         />
 
         <CardContent
           sx={{
             width: '65%',
             p: 0,
+            height: '100%',
           }}
         >
           <Box
@@ -42,15 +41,15 @@ const CartItem = ({ item }) => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-around',
-              height: '70%',
+              height: '75%',
               p: 2,
             }}
           >
             <Typography variant="h7" fontWeight="bold">
-              Product Name
+              {item.name}
             </Typography>
             <Typography variant="h7" fontWeight="bold">
-              $100
+              ${item.price}.00
             </Typography>
           </Box>
           <Box
@@ -58,21 +57,23 @@ const CartItem = ({ item }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-around',
-              height: '45%',
+              height: '43%',
             }}
           >
             <Box
               sx={{
+                px: 1,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 height: '75%',
-                width: '40%',
+                width: '45%',
                 border: '1px solid black',
               }}
             >
               <IconButton
                 sx={{
+                  width: '30%',
                   '&:hover': {
                     color: 'black',
                   },
@@ -80,11 +81,17 @@ const CartItem = ({ item }) => {
               >
                 <RemoveIcon />
               </IconButton>
-              <Typography variant="h7" fontWeight="bold">
+              <Typography
+                sx={{ width: '40%' }}
+                variant="h7"
+                fontWeight="bold"
+                align="center"
+              >
                 1
               </Typography>
               <IconButton
                 sx={{
+                  width: '30%',
                   '&:hover': {
                     color: 'black',
                   },
@@ -97,7 +104,6 @@ const CartItem = ({ item }) => {
               textTransform="uppercase"
               variant="h7"
               sx={{
-                pr: 2,
                 cursor: 'pointer',
                 '&::after': {
                   content: '""',

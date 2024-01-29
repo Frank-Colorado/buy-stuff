@@ -12,7 +12,7 @@ const Cart = ({ handleCartClose }) => {
 
   return (
     <Box
-      sx={{ height: '100vh', width: { xs: '75vw', md: '30vw', lg: '20vw' } }}
+      sx={{ height: '100vh', width: { xs: '85vw', md: '70vw', lg: '20vw' } }}
     >
       <Box
         sx={{
