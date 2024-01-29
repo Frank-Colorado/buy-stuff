@@ -55,10 +55,10 @@ const Cart = ({ handleCartClose }) => {
           </Box>
         )}
       </Box>
-      <Divider />
+      <Divider sx={{ display: cart.length > 0 ? 'flex' : 'none' }} />
       <Box
         sx={{
-          display: 'flex',
+          display: cart.length > 0 ? 'flex' : 'none',
           justifyContent: 'center',
           alignItems: 'center',
           position: 'absolute',
@@ -75,7 +75,8 @@ const Cart = ({ handleCartClose }) => {
             width: '80%',
           }}
         >
-          Checkout
+          Checkout - $
+          {cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}.00
         </Button>
       </Box>
     </Box>
