@@ -1,10 +1,14 @@
+// React hooks
+import { useState } from 'react';
+// Redux hooks
+import { useDispatch } from 'react-redux';
+import { removeItem } from '../../store/slices/cartSlice';
 // MUI components
 import {
   Box,
   Card,
   CardMedia,
   CardContent,
-  Button,
   Typography,
   IconButton,
 } from '@mui/material';
@@ -12,6 +16,25 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 const CartItem = ({ item }) => {
+  // Redux dispatch setup
+  const dispatch = useDispatch();
+  // Local state for now
+  const [quantityState, setQuantityState] = useState(item.quantity);
+
+  const handleRemoveItem = () => {
+    dispatch(removeItem(item.cartId));
+  };
+
+  const handleQuantityIncrement = () => {
+    setQuantityState(quantityState + 1);
+  };
+
+  const handleQuantityDecrement = () => {
+    if (quantityState > 1) {
+      setQuantityState(quantityState - 1);
+    }
+  };
+
   return (
     <Box sx={{ mt: 2, height: '23%', p: 2 }}>
       <Card
@@ -49,6 +72,9 @@ const CartItem = ({ item }) => {
               {item.name}
             </Typography>
             <Typography variant="h7" fontWeight="bold">
+              Size: {item.size}
+            </Typography>
+            <Typography variant="h7" fontWeight="bold">
               ${item.price}.00
             </Typography>
           </Box>
@@ -72,6 +98,7 @@ const CartItem = ({ item }) => {
               }}
             >
               <IconButton
+                onClick={handleQuantityDecrement}
                 sx={{
                   width: '30%',
                   '&:hover': {
@@ -87,9 +114,10 @@ const CartItem = ({ item }) => {
                 fontWeight="bold"
                 align="center"
               >
-                1
+                {quantityState}
               </Typography>
               <IconButton
+                onClick={handleQuantityIncrement}
                 sx={{
                   width: '30%',
                   '&:hover': {
@@ -101,6 +129,7 @@ const CartItem = ({ item }) => {
               </IconButton>
             </Box>
             <Typography
+              onClick={handleRemoveItem}
               textTransform="uppercase"
               variant="h7"
               sx={{
