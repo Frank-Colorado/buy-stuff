@@ -1,7 +1,65 @@
+// React hooks
+import { useState } from 'react';
 // MUI components
 import { Grid, Typography, TextField, Button } from '@mui/material';
+// React Country Selector
+import { CountryDropdown } from 'react-country-region-selector';
+
+// Initial state for the address portion of the form
+const initialAddressState = {
+  line1: '',
+  line2: '',
+  city: '',
+  state: '',
+  zip: '',
+  country: '',
+};
 
 const CheckoutDetails = () => {
+  // State for the form
+  const [shippingAddress, setShippingAddress] = useState({
+    ...initialAddressState,
+  });
+  const [billingAddress, setBillingAddress] = useState({
+    ...initialAddressState,
+  });
+  const [recipientName, setRecipientName] = useState('');
+  const [nameOnCard, setNameOnCard] = useState('');
+
+  // Handle shipping address changes
+  const handleShippingChange = (e) => {
+    const { name, value } = e.target;
+    setShippingAddress({
+      ...shippingAddress,
+      [name]: value,
+    });
+  };
+
+  // Handle billing address changes
+  const handleBillingChange = (e) => {
+    const { name, value } = e.target;
+    setBillingAddress({
+      ...billingAddress,
+      [name]: value,
+    });
+  };
+
+  // Handle recipient name change
+  const handleRecipientNameChange = (e) => {
+    setRecipientName(e.target.value);
+  };
+
+  // Handle name on card change
+  const handleNameOnCardChange = (e) => {
+    setNameOnCard(e.target.value);
+  };
+
+  // Handle form submit
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Form submitted');
+  };
+
   return (
     <Grid
       item
@@ -11,11 +69,14 @@ const CheckoutDetails = () => {
         my: 2,
       }}
     >
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
           Shipping Address
         </Typography>
         <TextField
+          value={recipientName}
+          onChange={handleRecipientNameChange}
+          name="recipientName"
           size="small"
           placeholder="Recipient Name"
           variant="outlined"
@@ -23,6 +84,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={shippingAddress.line1}
+          onChange={handleShippingChange}
+          name="line1"
           size="small"
           placeholder="Address Line 1"
           variant="outlined"
@@ -30,6 +94,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={shippingAddress.line2}
+          onChange={handleShippingChange}
+          name="line2"
           size="small"
           placeholder="Address Line 2"
           variant="outlined"
@@ -37,6 +104,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={shippingAddress.city}
+          onChange={handleShippingChange}
+          name="city"
           size="small"
           placeholder="City"
           variant="outlined"
@@ -44,6 +114,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={shippingAddress.state}
+          onChange={handleShippingChange}
+          name="state"
           size="small"
           placeholder="State"
           variant="outlined"
@@ -51,16 +124,48 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={shippingAddress.zip}
+          onChange={handleShippingChange}
+          name="zip"
           size="small"
           placeholder="Zip Code"
           variant="outlined"
           fullWidth
           sx={{ mb: 2 }}
         />
+        <CountryDropdown
+          value={shippingAddress.country}
+          onChange={(val) =>
+            handleShippingChange({
+              target: {
+                name: 'country',
+                value: val,
+              },
+            })
+          }
+          valueType="short"
+          style={{
+            width: '100%',
+            fontSize: '1rem',
+            lineHeight: '1',
+            fontWeight: '400',
+            textAlign: 'left',
+            padding: '10px, 5px',
+            margin: '10px auto',
+            height: '40px',
+            border: '1px solid rgba(0, 0, 0, 0.23)',
+            borderRadius: '4px',
+            outline: 'none',
+          }}
+        />
+
         <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
           Billing Address
         </Typography>
         <TextField
+          value={nameOnCard}
+          onChange={handleNameOnCardChange}
+          name="nameOnCard"
           size="small"
           placeholder="Name on Card"
           variant="outlined"
@@ -68,6 +173,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={billingAddress.line1}
+          onChange={handleBillingChange}
+          name="line1"
           size="small"
           placeholder="Address Line 1"
           variant="outlined"
@@ -75,6 +183,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={billingAddress.line2}
+          onChange={handleBillingChange}
+          name="line2"
           size="small"
           placeholder="Address Line 2"
           variant="outlined"
@@ -82,6 +193,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={billingAddress.city}
+          onChange={handleBillingChange}
+          name="city"
           size="small"
           placeholder="City"
           variant="outlined"
@@ -89,6 +203,9 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={billingAddress.state}
+          onChange={handleBillingChange}
+          name="state"
           size="small"
           placeholder="State"
           variant="outlined"
@@ -96,11 +213,39 @@ const CheckoutDetails = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          value={billingAddress.zip}
+          onChange={handleBillingChange}
+          name="zip"
           size="small"
           placeholder="Zip Code"
           variant="outlined"
           fullWidth
           sx={{ mb: 2 }}
+        />
+        <CountryDropdown
+          value={billingAddress.country}
+          onChange={(val) =>
+            handleBillingChange({
+              target: {
+                name: 'country',
+                value: val,
+              },
+            })
+          }
+          valueType="short"
+          style={{
+            width: '100%',
+            fontSize: '1rem',
+            lineHeight: '1',
+            fontWeight: '400',
+            textAlign: 'left',
+            padding: '10px, 5px',
+            margin: '10px auto',
+            height: '40px',
+            border: '1px solid rgba(0, 0, 0, 0.23)',
+            borderRadius: '4px',
+            outline: 'none',
+          }}
         />
         <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
           Payment Information
