@@ -1,7 +1,10 @@
+// My components
+import CheckoutDetails from '../components/checkout/CheckoutDetails.jsx';
+
 const CheckoutPage = () => {
   return (
     <div>
-      <h1>Checkout</h1>
+      <CheckoutDetails />
     </div>
   );
 };
