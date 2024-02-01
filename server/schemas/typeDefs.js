@@ -61,7 +61,8 @@ const typeDefs = gql`
   }
 
   input CartItemInput {
-    _id: ID
+    cartId: ID
+    id: ID
     name: String
     size: String
     image: String
