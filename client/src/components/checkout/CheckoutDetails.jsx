@@ -1,11 +1,9 @@
 // React hooks
 import { useState } from 'react';
 // MUI components
-import { Grid, Box, Typography, TextField, Button } from '@mui/material';
+import { Grid, Typography, TextField, Button } from '@mui/material';
 // React Country Selector
 import { CountryDropdown } from 'react-country-region-selector';
-// Stripe
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 // Initial state for the address portion of the form
 const initialAddressState = {
@@ -18,8 +16,6 @@ const initialAddressState = {
 };
 
 const CheckoutDetails = () => {
-  // Stripe hooks
-  const elements = useElements();
   // State for the form
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
@@ -61,35 +57,6 @@ const CheckoutDetails = () => {
   // Handle form submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const cardElement = elements.getElement('card');
-
-    if (
-      !shippingAddress.line1 ||
-      !shippingAddress.city ||
-      !shippingAddress.state ||
-      !shippingAddress.zip ||
-      !shippingAddress.country ||
-      !recipientName ||
-      !billingAddress.line1 ||
-      !billingAddress.city ||
-      !billingAddress.state ||
-      !billingAddress.zip ||
-      !billingAddress.country ||
-      !nameOnCard
-    ) {
-      return;
-    }
-    console.log('cardElement: ', cardElement);
-  };
-
-  const configCardElement = {
-    iconStyle: 'solid',
-    style: {
-      base: {
-        fontSize: '16px',
-      },
-    },
-    hidePostalCode: true,
   };
 
   return (
@@ -291,12 +258,6 @@ const CheckoutDetails = () => {
             outline: 'none',
           }}
         />
-        <Box sx={{ my: 5 }}>
-          <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
-            Payment Information
-          </Typography>
-          <CardElement options={configCardElement} />
-        </Box>
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Submit
         </Button>
