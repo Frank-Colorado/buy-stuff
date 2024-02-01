@@ -19,6 +19,16 @@ const typeDefs = gql`
     imageUrl: String
   }
 
+  type Address {
+    name: String
+    line1: String
+    line2: String
+    city: String
+    state: String
+    zip: String
+    country: String
+  }
+
   type Order {
     _id: ID
     purchaseDate: String
@@ -29,19 +39,21 @@ const typeDefs = gql`
     products: [Clothing]
   }
 
-  type Address {
-    recipientName: String
-    line1: String
-    line2: String
-    city: String
-    state: String
-    zip: String
-    country: String
-  }
-
   type ClothingResult {
     clothing: [Clothing]
     count: Int
+  }
+
+  type CartItem {
+    name: String
+    size: String
+    image: String
+    price: Float
+    quantity: Int
+  }
+
+  type Checkout {
+    session: ID
   }
 
   type Auth {
@@ -58,6 +70,7 @@ const typeDefs = gql`
       limit: Int!
       offset: Int!
     ): ClothingResult
+    checkout(items: [CartItem]!): Checkout
   }
 
   type Mutation {
