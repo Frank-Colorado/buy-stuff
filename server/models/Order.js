@@ -11,6 +11,14 @@ const OrderSchema = new Schema({
       ref: 'Clothing',
     },
   ],
+  customer: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  guestEmail: {
+    type: String,
+    match: [/.+@.+\..+/, 'Please enter a valid e-mail address'],
+  },
   shippingAddress: {
     recipientName: {
       type: String,

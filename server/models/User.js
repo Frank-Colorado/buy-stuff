@@ -23,6 +23,12 @@ const UserSchema = new Schema({
     type: [String],
     default: ['user'],
   },
+  orders: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Order',
+    },
+  ],
 });
 
 // Pre-save middleware to encrypt password
