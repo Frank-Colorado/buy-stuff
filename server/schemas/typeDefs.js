@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     roles: [String]
+    orders: [Order]
   }
 
   type Clothing {
@@ -29,6 +30,12 @@ const typeDefs = gql`
     country: String
   }
 
+  type Product {
+    productId: ID
+    selectedSize: String
+    quantity: Int
+  }
+
   type Order {
     _id: ID
     purchaseDate: String
@@ -36,7 +43,7 @@ const typeDefs = gql`
     guestEmail: String
     shippingAddress: Address
     billingAddress: Address
-    products: [Clothing]
+    products: [Product]
   }
 
   type ClothingResult {
@@ -45,6 +52,7 @@ const typeDefs = gql`
   }
 
   type CartItem {
+    _id: ID
     name: String
     size: String
     image: String
@@ -71,6 +79,7 @@ const typeDefs = gql`
       offset: Int!
     ): ClothingResult
     checkout(items: [CartItem]!): Checkout
+    order(orderId: ID!): Order
   }
 
   type Mutation {
@@ -96,6 +105,12 @@ const typeDefs = gql`
       imageUrl: String
     ): Clothing
     deleteClothing(clothingId: ID!): Clothing
+    addOrder(
+      products: [Product]!
+      guestEmail: String
+      shippingAddress: Address!
+      billingAddress: Address!
+    ): Order
   }
 `;
 
