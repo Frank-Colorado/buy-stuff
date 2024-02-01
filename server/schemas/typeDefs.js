@@ -19,6 +19,26 @@ const typeDefs = gql`
     imageUrl: String
   }
 
+  type Order {
+    _id: ID
+    purchaseDate: String
+    customer: User
+    guestEmail: String
+    shippingAddress: Address
+    billingAddress: Address
+    products: [Clothing]
+  }
+
+  type Address {
+    recipientName: String
+    line1: String
+    line2: String
+    city: String
+    state: String
+    zip: String
+    country: String
+  }
+
   type ClothingResult {
     clothing: [Clothing]
     count: Int
