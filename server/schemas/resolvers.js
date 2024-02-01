@@ -1,6 +1,8 @@
-const { User, Clothing } = require('../models');
+require('dotenv').config();
+const { User, Clothing, Order } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const resolvers = {
   Query: {
@@ -50,6 +52,58 @@ const resolvers = {
       } catch (err) {
         console.log(err);
       }
+    },
+    // Checkout query
+    checkout: async (_root, { items }, context) => {
+      // create a url variable to store the base URL from the request
+      const url = new URL(context.headers.referer).origin;
+      // create lineItems for the stripe checkout session
+      const lineItemsPromises = items.map(async (item) => {
+        try {
+          // Create a new stripe product for each item in the cart
+          const stripeProuct = await stripe.products.create({
+            name: item.name,
+            description: item.size,
+            images: [item.image],
+          });
+          // create a new stripe price for each item in the cart
+          const stripePrice = await stripe.prices.create({
+            product: stripeProuct.id,
+            unit_amount: item.price * 100,
+            currency: 'usd',
+          });
+          // return the price and quantity for each item in the cart
+          return {
+            price: stripePrice.id,
+            quantity: item.quantity,
+          };
+        } catch (err) {
+          // Error handling for creating stripe product and price
+          console.error(
+            `Error creating Stripe product for item ${item.name}:`,
+            err.message
+          );
+          return {
+            error: `Error creating Stripe product for item ${item.name}`,
+          };
+        }
+      });
+      // get the line items from the Promise.all
+      const lineItems = await Promise.allSettled(lineItemsPromises);
+      // filter out any rejected promises
+      const line_items = lineItems
+        .filter((result) => result.status === 'fulfilled')
+        .map((result) => result.value);
+      // create a new stripe checkout session
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+      });
+      // return the session id
+      return { session: session.id };
     },
   },
   Mutation: {
