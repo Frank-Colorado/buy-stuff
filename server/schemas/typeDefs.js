@@ -51,7 +51,16 @@ const typeDefs = gql`
     count: Int
   }
 
-  type CartItem {
+  type Checkout {
+    session: ID
+  }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  input CartItemInput {
     _id: ID
     name: String
     size: String
@@ -60,13 +69,20 @@ const typeDefs = gql`
     quantity: Int
   }
 
-  type Checkout {
-    session: ID
+  input AddressInput {
+    name: String
+    line1: String
+    line2: String
+    city: String
+    state: String
+    zip: String
+    country: String
   }
 
-  type Auth {
-    token: ID!
-    user: User
+  input ProductInput {
+    productId: ID
+    selectedSize: String
+    quantity: Int
   }
 
   type Query {
@@ -78,7 +94,7 @@ const typeDefs = gql`
       limit: Int!
       offset: Int!
     ): ClothingResult
-    checkout(items: [CartItem]!): Checkout
+    checkout(items: [CartItemInput]!): Checkout
     order(orderId: ID!): Order
   }
 
@@ -106,10 +122,10 @@ const typeDefs = gql`
     ): Clothing
     deleteClothing(clothingId: ID!): Clothing
     addOrder(
-      products: [Product]!
+      products: [ProductInput]!
       guestEmail: String
-      shippingAddress: Address!
-      billingAddress: Address!
+      shippingAddress: AddressInput!
+      billingAddress: AddressInput!
     ): Order
   }
 `;

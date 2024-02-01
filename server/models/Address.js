@@ -30,4 +30,4 @@ const AddressSchema = new Schema({
   },
 });
 
-modules.exports = AddressSchema;
+module.exports = AddressSchema;
