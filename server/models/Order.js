@@ -8,8 +8,16 @@ const OrderSchema = new Schema({
   },
   products: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Clothing',
+      productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Clothing',
+      },
+      selectedSize: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
     },
   ],
   customer: {
