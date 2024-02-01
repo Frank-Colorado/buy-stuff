@@ -1,9 +1,11 @@
 // React hooks
 import { useState } from 'react';
 // MUI components
-import { Grid, Typography, TextField, Button } from '@mui/material';
+import { Grid, Box, Typography, TextField, Button } from '@mui/material';
 // React Country Selector
 import { CountryDropdown } from 'react-country-region-selector';
+// Stripe
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 // Initial state for the address portion of the form
 const initialAddressState = {
@@ -16,6 +18,8 @@ const initialAddressState = {
 };
 
 const CheckoutDetails = () => {
+  // Stripe hooks
+  const elements = useElements();
   // State for the form
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
@@ -57,7 +61,35 @@ const CheckoutDetails = () => {
   // Handle form submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted');
+    const cardElement = elements.getElement('card');
+
+    if (
+      !shippingAddress.line1 ||
+      !shippingAddress.city ||
+      !shippingAddress.state ||
+      !shippingAddress.zip ||
+      !shippingAddress.country ||
+      !recipientName ||
+      !billingAddress.line1 ||
+      !billingAddress.city ||
+      !billingAddress.state ||
+      !billingAddress.zip ||
+      !billingAddress.country ||
+      !nameOnCard
+    ) {
+      return;
+    }
+    console.log('cardElement: ', cardElement);
+  };
+
+  const configCardElement = {
+    iconStyle: 'solid',
+    style: {
+      base: {
+        fontSize: '16px',
+      },
+    },
+    hidePostalCode: true,
   };
 
   return (
@@ -77,6 +109,7 @@ const CheckoutDetails = () => {
           value={recipientName}
           onChange={handleRecipientNameChange}
           name="recipientName"
+          required
           size="small"
           placeholder="Recipient Name"
           variant="outlined"
@@ -87,6 +120,7 @@ const CheckoutDetails = () => {
           value={shippingAddress.line1}
           onChange={handleShippingChange}
           name="line1"
+          required
           size="small"
           placeholder="Address Line 1"
           variant="outlined"
@@ -107,6 +141,7 @@ const CheckoutDetails = () => {
           value={shippingAddress.city}
           onChange={handleShippingChange}
           name="city"
+          required
           size="small"
           placeholder="City"
           variant="outlined"
@@ -117,6 +152,7 @@ const CheckoutDetails = () => {
           value={shippingAddress.state}
           onChange={handleShippingChange}
           name="state"
+          required
           size="small"
           placeholder="State"
           variant="outlined"
@@ -127,6 +163,7 @@ const CheckoutDetails = () => {
           value={shippingAddress.zip}
           onChange={handleShippingChange}
           name="zip"
+          required
           size="small"
           placeholder="Zip Code"
           variant="outlined"
@@ -143,6 +180,7 @@ const CheckoutDetails = () => {
               },
             })
           }
+          required
           valueType="short"
           style={{
             width: '100%',
@@ -166,6 +204,7 @@ const CheckoutDetails = () => {
           value={nameOnCard}
           onChange={handleNameOnCardChange}
           name="nameOnCard"
+          required
           size="small"
           placeholder="Name on Card"
           variant="outlined"
@@ -176,6 +215,7 @@ const CheckoutDetails = () => {
           value={billingAddress.line1}
           onChange={handleBillingChange}
           name="line1"
+          required
           size="small"
           placeholder="Address Line 1"
           variant="outlined"
@@ -196,6 +236,7 @@ const CheckoutDetails = () => {
           value={billingAddress.city}
           onChange={handleBillingChange}
           name="city"
+          required
           size="small"
           placeholder="City"
           variant="outlined"
@@ -206,6 +247,7 @@ const CheckoutDetails = () => {
           value={billingAddress.state}
           onChange={handleBillingChange}
           name="state"
+          required
           size="small"
           placeholder="State"
           variant="outlined"
@@ -216,6 +258,7 @@ const CheckoutDetails = () => {
           value={billingAddress.zip}
           onChange={handleBillingChange}
           name="zip"
+          required
           size="small"
           placeholder="Zip Code"
           variant="outlined"
@@ -232,6 +275,7 @@ const CheckoutDetails = () => {
               },
             })
           }
+          required
           valueType="short"
           style={{
             width: '100%',
@@ -247,9 +291,12 @@ const CheckoutDetails = () => {
             outline: 'none',
           }}
         />
-        <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
-          Payment Information
-        </Typography>
+        <Box sx={{ my: 5 }}>
+          <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
+            Payment Information
+          </Typography>
+          <CardElement options={configCardElement} />
+        </Box>
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Submit
         </Button>
