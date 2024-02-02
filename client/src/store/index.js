@@ -10,6 +10,7 @@ import {
 } from './slices/productSlice';
 import {
   cartReducer,
+  setCart,
   addItem,
   removeItem,
   incrementItem,
@@ -34,6 +35,7 @@ export {
   addProduct,
   updateProducts,
   deleteProduct,
+  setCart,
   addItem,
   removeItem,
   incrementItem,

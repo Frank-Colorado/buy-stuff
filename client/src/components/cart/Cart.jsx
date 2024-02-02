@@ -1,3 +1,5 @@
+// React Hooks
+import { useEffect } from 'react';
 // My components
 import CartItem from './CartItem';
 // MUI components

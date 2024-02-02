@@ -4,6 +4,10 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: [],
   reducers: {
+    setCart: (_state, { payload }) => {
+      // Set the cart to the payload
+      return payload;
+    },
     addItem: (state, { payload }) => {
       // Add the new item to the end of the array
       state.push(payload);
@@ -31,6 +35,12 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, incrementItem, decrementItem, clearCart } =
-  cartSlice.actions;
+export const {
+  setCart,
+  addItem,
+  removeItem,
+  incrementItem,
+  decrementItem,
+  clearCart,
+} = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
