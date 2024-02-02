@@ -10,8 +10,8 @@ import {
   ToggleButton,
 } from '@mui/material';
 // Redux hooks
-import { useDispatch } from 'react-redux';
-import { addItem } from '../../store/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, incrementItem } from '../../store/index';
 
 // Array of size options
 const sizeOptions = ['XS', 'S', 'M', 'L', 'XL'];
@@ -19,7 +19,8 @@ const sizeOptions = ['XS', 'S', 'M', 'L', 'XL'];
 const ProductDetails = ({ product }) => {
   // Redux dispatch setup
   const dispatch = useDispatch();
-
+  // Get the cart state from the Redux store
+  const cart = useSelector((state) => state.cart);
   // State to keep track of the selected size
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
 
@@ -30,6 +31,8 @@ const ProductDetails = ({ product }) => {
 
   // Handle adding the item to the cart
   const handleAddToCart = () => {
+    // If the user hasn't selected a size, return early
+    if (!selectedSize) return;
     // Create a new item object to add to the cart
     const newItem = {
       cartId: `${product._id}-${selectedSize}`,
@@ -40,6 +43,23 @@ const ProductDetails = ({ product }) => {
       size: selectedSize,
       quantity: 1,
     };
+    // Check to see if this item is already in the cart
+    const itemInCart = cart.find((item) => item.cartId === newItem.cartId);
+    if (itemInCart) {
+      // If the item is already in the cart and the sizes are the same, increment the quantity
+      dispatch(incrementItem(newItem.cartId));
+      // Get the userCart array from local storage
+      const userCart = JSON.parse(localStorage.getItem('userCart'));
+      // Find the item to update
+      const itemToUpdate = userCart.find(
+        (item) => item.cartId === newItem.cartId
+      );
+      // Update the item's quantity
+      itemToUpdate.quantity += 1;
+      // Store the updated userCart array in local storage
+      localStorage.setItem('userCart', JSON.stringify(userCart));
+      return;
+    }
     // Dispatch the action to add the item to the cart
     dispatch(addItem(newItem));
     // Create a userCart array to store in local storage
