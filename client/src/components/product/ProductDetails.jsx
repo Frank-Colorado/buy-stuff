@@ -42,6 +42,12 @@ const ProductDetails = ({ product }) => {
     };
     // Dispatch the action to add the item to the cart
     dispatch(addItem(newItem));
+    // Create a userCart array to store in local storage
+    const userCart = JSON.parse(localStorage.getItem('userCart')) || [];
+    // Add the new item to the userCart array
+    userCart.push(newItem);
+    // Store the userCart array in local storage
+    localStorage.setItem('userCart', JSON.stringify(userCart));
   };
 
   return (

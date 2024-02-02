@@ -14,21 +14,15 @@ const Cart = ({ handleCartClose }) => {
   // Redux state
   const cart = useSelector((state) => state.cart);
 
-  const handleCheckout = () => {
-    // A checkout object stored in local storage
-    const checkout = {
-      cart,
-      shippingAddress: {},
-      billingAddress: {},
-      guestEmail: '',
-    };
-    // Store the checkout object in local storage
-    localStorage.setItem('checkout', JSON.stringify(checkout));
-    // Close the cart
-    handleCartClose();
-    // Navigate to the checkout page
-    navigate('/checkout');
-  };
+  // const handleCheckout = () => {
+  //   localStorage// Store the checkout object in local storage
+  //   .localStorage
+  //     .setItem('checkout', JSON.stringify(checkout));
+  //   // Close the cart
+  //   handleCartClose();
+  //   // Navigate to the checkout page
+  //   navigate('/checkout');
+  // };
 
   return (
     <Box
@@ -89,7 +83,7 @@ const Cart = ({ handleCartClose }) => {
         }}
       >
         <Button
-          onClick={handleCheckout}
+          // onClick={handleCheckout}
           variant="contained"
           color="primary"
           sx={{

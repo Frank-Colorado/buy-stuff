@@ -57,6 +57,22 @@ const CheckoutDetails = () => {
   // Handle form submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    // Modify the checkout object stored in local storage
+    const checkout = JSON.parse(localStorage.getItem('checkout'));
+
+    checkout.shippingAddress = {
+      name: recipientName,
+      ...shippingAddress,
+    };
+    checkout.billingAddress = {
+      name: nameOnCard,
+      ...billingAddress,
+    };
+
+    localStorage.setItem('checkout', JSON.stringify(checkout));
+
+    console.log(checkout);
   };
 
   return (
@@ -259,7 +275,7 @@ const CheckoutDetails = () => {
           }}
         />
         <Button type="submit" variant="contained" color="primary" fullWidth>
-          Submit
+          Continue to Payment
         </Button>
       </form>
     </Grid>
