@@ -6,25 +6,36 @@ import CartItem from './CartItem';
 import { Box, Typography, Button, IconButton, Divider } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 // Redux hooks
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCart } from '../../store';
 // React router hooks
 import { useNavigate } from 'react-router-dom';
 
 const Cart = ({ handleCartClose }) => {
+  // Redux dispatch setup
+  const dispatch = useDispatch();
   // React router hooks
   const navigate = useNavigate();
   // Redux state
   const cart = useSelector((state) => state.cart);
 
-  // const handleCheckout = () => {
-  //   localStorage// Store the checkout object in local storage
-  //   .localStorage
-  //     .setItem('checkout', JSON.stringify(checkout));
-  //   // Close the cart
-  //   handleCartClose();
-  //   // Navigate to the checkout page
-  //   navigate('/checkout');
-  // };
+  useEffect(() => {
+    const getCart = () => {
+      const userCart = JSON.parse(localStorage.getItem('userCart')) || [];
+      dispatch(setCart(userCart));
+    };
+
+    if (!cart.length) {
+      getCart();
+    }
+  }, [cart.length, dispatch]);
+
+  const handleCheckout = () => {
+    // Close the cart
+    handleCartClose();
+    // Navigate to the checkout page
+    navigate('/checkout');
+  };
 
   return (
     <Box
@@ -85,7 +96,7 @@ const Cart = ({ handleCartClose }) => {
         }}
       >
         <Button
-          // onClick={handleCheckout}
+          onClick={handleCheckout}
           variant="contained"
           color="primary"
           sx={{
