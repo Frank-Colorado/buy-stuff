@@ -23,16 +23,53 @@ const CartItem = ({ item: { cartId, image, name, size, price, quantity } }) => {
 
   // Handle removing the item from the cart
   const handleRemoveItem = () => {
+    // Dispatch the action to remove the item from the cart
     dispatch(removeItem(cartId));
+    // Get the userCart array from local storage
+    const userCart = JSON.parse(localStorage.getItem('userCart'));
+    // Filter out the removed item
+    const updatedCart = userCart.filter((item) => item.cartId !== cartId);
+    // Store the updatedCart array in local storage
+    localStorage.setItem('userCart', JSON.stringify(updatedCart));
   };
 
+  // Handle incrementing the item's quantity
   const handleQuantityIncrement = () => {
+    // Dispatch the action to increment the item's quantity
     dispatch(incrementItem(cartId));
+    // Get the userCart array from local storage
+    const userCart = JSON.parse(localStorage.getItem('userCart'));
+    // Find the item to update
+    const itemToUpdate = userCart.find((item) => item.cartId === cartId);
+    // Update the item's quantity
+    itemToUpdate.quantity += 1;
+    // Store the updated userCart array in local storage
+    localStorage.setItem('userCart', JSON.stringify(userCart));
   };
 
+  // Handle decrementing the item's quantity
   const handleQuantityDecrement = () => {
-    if (quantity > 1) {
+    // If the quantity is 1, remove the item from the cart
+    if (quantity === 1) {
+      // Dispatch the action to remove the item from the cart
+      dispatch(removeItem(cartId));
+      // Get the userCart array from local storage
+      const userCart = JSON.parse(localStorage.getItem('userCart'));
+      // Filter out the removed item
+      const updatedCart = userCart.filter((item) => item.cartId !== cartId);
+      // Store the updatedCart array in local storage
+      localStorage.setItem('userCart', JSON.stringify(updatedCart));
+    } else {
+      // Dispatch the action to decrement the item's quantity
       dispatch(decrementItem(cartId));
+      // Get the userCart array from local storage
+      const userCart = JSON.parse(localStorage.getItem('userCart'));
+      // Find the item to update
+      const itemToUpdate = userCart.find((item) => item.cartId === cartId);
+      // Update the item's quantity
+      itemToUpdate.quantity -= 1;
+      // Store the updated userCart array in local storage
+      localStorage.setItem('userCart', JSON.stringify(userCart));
     }
   };
 
