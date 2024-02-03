@@ -59,6 +59,7 @@ const resolvers = {
       const url = new URL(context.headers.referer).origin;
       // create a new form object in the session
       context.session.form = form;
+      console.log(context.session);
       // create lineItems for the stripe checkout session
       const lineItemsPromises = items.map(async (item) => {
         try {
@@ -208,7 +209,8 @@ const resolvers = {
         // declare a variable to store the order data
         let orderData;
         // retrieve the form data from the express session
-        const form = context.req.session.form;
+        const form = context.session.form;
+        console.log(context.session);
         // if the form data is not found, throw an error
         if (!form) {
           throw new Error('Form data not found');

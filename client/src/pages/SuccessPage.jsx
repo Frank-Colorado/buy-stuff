@@ -1,7 +1,13 @@
 // React hooks
 import { useEffect } from 'react';
+// GraphQL hooks
+import { useMutation } from '@apollo/client';
+import { ADD_ORDER } from '../graphQL/mutations';
 
 const SuccessPage = () => {
+  // GraphQL mutation to add an order
+  const [addOrder] = useMutation(ADD_ORDER);
+
   // useEffect hook to handle adding an order after a successful payment
   useEffect(() => {
     // Save the order to the database

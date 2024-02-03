@@ -36,15 +36,15 @@ const CheckoutDetails = () => {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   // useEffect hook to handle the checkout session data
-  useEffect(() => {
-    if (data) {
-      stripePromise.then((stripe) => {
-        stripe.redirectToCheckout({
-          sessionId: data.checkout.session,
-        });
-      });
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     stripePromise.then((stripe) => {
+  //       stripe.redirectToCheckout({
+  //         sessionId: data.checkout.session,
+  //       });
+  //     });
+  //   }
+  // }, [data]);
 
   // Handle shipping address changes
   const handleShippingChange = (e) => {
