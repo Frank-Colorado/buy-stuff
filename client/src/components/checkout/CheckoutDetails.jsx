@@ -1,5 +1,5 @@
 // React hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // MUI components
 import { Grid, Typography, TextField, Button } from '@mui/material';
 // React Country Selector
@@ -7,6 +7,9 @@ import { CountryDropdown } from 'react-country-region-selector';
 // GraphQL hooks
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../../graphQL/queries';
+// Stripe API
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 // Initial state for the address portion of the form
 const initialAddressState = {
@@ -31,6 +34,17 @@ const CheckoutDetails = () => {
 
   // GraphQL query to get the checkout session
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+
+  // useEffect hook to handle the checkout session data
+  useEffect(() => {
+    if (data) {
+      stripePromise.then((stripe) => {
+        stripe.redirectToCheckout({
+          sessionId: data.checkout.session,
+        });
+      });
+    }
+  }, [data]);
 
   // Handle shipping address changes
   const handleShippingChange = (e) => {
@@ -62,9 +76,11 @@ const CheckoutDetails = () => {
 
   // Handle form submit
   const handleFormSubmit = async (e) => {
+    // Prevent the default form behavior
     e.preventDefault();
-    // Create a checkout object to hold the form data
-    const checkout = {
+    // Create an object to hold the form data
+    const checkoutData = {
+      guestEmail: '',
       shippingAddress: {
         name: recipientName,
         ...shippingAddress,
@@ -73,20 +89,16 @@ const CheckoutDetails = () => {
         name: nameOnCard,
         ...billingAddress,
       },
-      guestEmail: '',
     };
-    // Get the checkout object from local storage
-    const checkoutData = JSON.parse(localStorage.getItem('checkout'));
-    // If the checkout object exists, update it with the new form data
-    if (checkoutData) {
-      localStorage.setItem(
-        'checkout',
-        JSON.stringify({ ...checkoutData, ...checkout })
-      );
-    } else {
-      // If the checkout object doesn't exist, create it
-      localStorage.setItem('checkout', JSON.stringify(checkout));
-    }
+    // Get the cart items from local storage
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    // Use the getCheckout query to get the checkout session
+    getCheckout({
+      variables: {
+        cart,
+        checkoutData,
+      },
+    });
   };
 
   return (
