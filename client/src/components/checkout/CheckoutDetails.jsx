@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { Grid, Typography, TextField, Button } from '@mui/material';
 // React Country Selector
 import { CountryDropdown } from 'react-country-region-selector';
+// GraphQL hooks
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_CHECKOUT } from '../../graphQL/queries';
 
 // Initial state for the address portion of the form
 const initialAddressState = {
@@ -25,6 +28,9 @@ const CheckoutDetails = () => {
   });
   const [recipientName, setRecipientName] = useState('');
   const [nameOnCard, setNameOnCard] = useState('');
+
+  // GraphQL query to get the checkout session
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   // Handle shipping address changes
   const handleShippingChange = (e) => {
@@ -57,22 +63,30 @@ const CheckoutDetails = () => {
   // Handle form submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    // Modify the checkout object stored in local storage
-    const checkout = JSON.parse(localStorage.getItem('checkout'));
-
-    checkout.shippingAddress = {
-      name: recipientName,
-      ...shippingAddress,
+    // Create a checkout object to hold the form data
+    const checkout = {
+      shippingAddress: {
+        name: recipientName,
+        ...shippingAddress,
+      },
+      billingAddress: {
+        name: nameOnCard,
+        ...billingAddress,
+      },
+      guestEmail: '',
     };
-    checkout.billingAddress = {
-      name: nameOnCard,
-      ...billingAddress,
-    };
-
-    localStorage.setItem('checkout', JSON.stringify(checkout));
-
-    console.log(checkout);
+    // Get the checkout object from local storage
+    const checkoutData = JSON.parse(localStorage.getItem('checkout'));
+    // If the checkout object exists, update it with the new form data
+    if (checkoutData) {
+      localStorage.setItem(
+        'checkout',
+        JSON.stringify({ ...checkoutData, ...checkout })
+      );
+    } else {
+      // If the checkout object doesn't exist, create it
+      localStorage.setItem('checkout', JSON.stringify(checkout));
+    }
   };
 
   return (
