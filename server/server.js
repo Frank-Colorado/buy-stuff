@@ -1,5 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+const session = require('express-session');
 const path = require('path');
 require('dotenv').config();
 const db = require('./config/connection');
@@ -16,6 +17,18 @@ const main = async () => {
   });
 
   const app = express();
+
+  const sess = {
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  };
+
+  app.use(session(sess));
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
