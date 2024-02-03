@@ -57,8 +57,8 @@ const resolvers = {
     checkout: async (_root, { items, form }, context) => {
       // create a url variable to store the base URL from the request
       const url = new URL(context.headers.referer).origin;
-      // Store the form data in an express session
-      req.session.form = form;
+      // create a new form object in the session
+      context.session.form = form;
       // create lineItems for the stripe checkout session
       const lineItemsPromises = items.map(async (item) => {
         try {

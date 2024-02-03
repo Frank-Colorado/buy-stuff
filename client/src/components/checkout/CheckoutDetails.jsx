@@ -91,12 +91,12 @@ const CheckoutDetails = () => {
       },
     };
     // Get the cart items from local storage
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('userCart'));
     // Use the getCheckout query to get the checkout session
     getCheckout({
       variables: {
-        cart,
-        checkoutData,
+        items: cart,
+        form: checkoutData,
       },
     });
   };
