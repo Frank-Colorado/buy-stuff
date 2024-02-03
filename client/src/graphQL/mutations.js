@@ -106,3 +106,39 @@ export const DELETE_PRODUCT = gql`
     }
   }
 `;
+
+export const ADD_ORDER = gql`
+  mutation addOrder($products: [ProductInput]!) {
+    addOrder(products: $products) {
+      _id
+      purchaseDate
+      customer {
+        _id
+        email
+      }
+      products {
+        productId
+        selectedSize
+        quantity
+      }
+      shippingAddress {
+        name
+        line1
+        line2
+        city
+        state
+        zip
+        country
+      }
+      billingAddress {
+        name
+        line1
+        line2
+        city
+        state
+        zip
+        country
+      }
+    }
+  }
+`;
