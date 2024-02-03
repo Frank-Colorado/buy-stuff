@@ -86,6 +86,12 @@ const typeDefs = gql`
     quantity: Int
   }
 
+  input CheckoutFormInput {
+    guestEmail: String
+    shippingAddress: AddressInput
+    billingAddress: AddressInput
+  }
+
   type Query {
     me: User
     allClothing: [Clothing]
@@ -95,7 +101,7 @@ const typeDefs = gql`
       limit: Int!
       offset: Int!
     ): ClothingResult
-    checkout(items: [CartItemInput]!): Checkout
+    checkout(items: [CartItemInput]!, form: CheckoutFormInput!): Checkout
     order(orderId: ID!): Order
   }
 
@@ -122,12 +128,7 @@ const typeDefs = gql`
       imageUrl: String
     ): Clothing
     deleteClothing(clothingId: ID!): Clothing
-    addOrder(
-      products: [ProductInput]!
-      guestEmail: String
-      shippingAddress: AddressInput!
-      billingAddress: AddressInput!
-    ): Order
+    addOrder(products: [ProductInput]!): Order
   }
 `;
 

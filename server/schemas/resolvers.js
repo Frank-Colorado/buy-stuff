@@ -54,9 +54,11 @@ const resolvers = {
       }
     },
     // Checkout query
-    checkout: async (_root, { items }, context) => {
+    checkout: async (_root, { items, form }, context) => {
       // create a url variable to store the base URL from the request
       const url = new URL(context.headers.referer).origin;
+      // Store the form data in an express session
+      req.session.form = form;
       // create lineItems for the stripe checkout session
       const lineItemsPromises = items.map(async (item) => {
         try {
@@ -199,6 +201,44 @@ const resolvers = {
       }
       // if the user is not an admin, throw an error
       throw new AuthenticationError('Not authorized');
+    },
+    // Mutation for adding an order
+    addOrder: async (_root, { products }, context) => {
+      try {
+        // declare a variable to store the order data
+        let orderData;
+        // retrieve the form data from the express session
+        const form = context.req.session.form;
+        // if the form data is not found, throw an error
+        if (!form) {
+          throw new Error('Form data not found');
+        }
+        // If the user is logged in, use the user's _id as the customer
+        if (context.user) {
+          orderData = {
+            products,
+            customer: context.user._id,
+            shippingAddress: form.shippingAddress,
+            billingAddress: form.billingAddress,
+          };
+        }
+        // If the user is not logged in, use the guestEmail as the customer
+        if (!context.user) {
+          orderData = {
+            products,
+            guestEmail: form.email,
+            shippingAddress: form.shippingAddress,
+            billingAddress: form.billingAddress,
+          };
+        }
+        // create a new order
+        const order = await Order.create(orderData);
+        // return the order
+        return order;
+      } catch (err) {
+        console.error('Error adding order', err);
+        throw new Error('Failed to add order');
+      }
     },
   },
 };
