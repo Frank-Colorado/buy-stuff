@@ -60,8 +60,8 @@ export const QUERY_PRODUCT_BY_CATEGORY = gql`
 `;
 
 export const QUERY_CHECKOUT = gql`
-  query getCheckout($items: [CartItemInput]!) {
-    checkout(items: $items) {
+  query getCheckout($items: [CartItemInput]!, $form: CheckoutFormInput!) {
+    checkout(items: $items, form: $form) {
       session
     }
   }
