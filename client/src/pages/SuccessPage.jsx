@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 // GraphQL hooks
 import { useMutation } from '@apollo/client';
 import { ADD_ORDER } from '../graphQL/mutations';
+// MUI components
+import { Box, Typography } from '@mui/material';
 
 const SuccessPage = () => {
   // GraphQL mutation to add an order
@@ -26,7 +28,7 @@ const SuccessPage = () => {
         // If the cart is not empty, create an order
         if (cart.length > 0) {
           // Add the order to the database
-          const { data } = await addOrder({
+          await addOrder({
             variables: {
               products,
             },
@@ -43,10 +45,14 @@ const SuccessPage = () => {
   }, [addOrder]);
 
   return (
-    <div>
-      <h1>Success</h1>
-      <p>Your payment was successful</p>
-    </div>
+    <Box sx={{ textAlign: 'center', mt: 10 }}>
+      <Typography variant="h4" gutterBottom>
+        Thank you for your purchase!
+      </Typography>
+      <Typography variant="body1">
+        Your order has been placed and will be shipped shortly.
+      </Typography>
+    </Box>
   );
 };
 
