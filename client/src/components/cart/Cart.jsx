@@ -1,35 +1,16 @@
-// React Hooks
-import { useEffect } from 'react';
 // My components
 import CartItem from './CartItem';
 // MUI components
 import { Box, Typography, Button, IconButton, Divider } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-// Redux hooks
-import { useSelector, useDispatch } from 'react-redux';
-import { setCart } from '../../store';
 // React router hooks
 import { useNavigate } from 'react-router-dom';
 
-const Cart = ({ handleCartClose }) => {
-  // Redux dispatch setup
-  const dispatch = useDispatch();
+const Cart = ({ handleCartClose, cart }) => {
   // React router hooks
   const navigate = useNavigate();
-  // Redux state
-  const cart = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    const getCart = () => {
-      const userCart = JSON.parse(localStorage.getItem('userCart')) || [];
-      dispatch(setCart(userCart));
-    };
-
-    if (!cart.length) {
-      getCart();
-    }
-  }, [cart.length, dispatch]);
-
+  // Handle the checkout button
   const handleCheckout = () => {
     // Close the cart
     handleCartClose();

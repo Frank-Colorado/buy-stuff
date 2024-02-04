@@ -1,5 +1,8 @@
 // React hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+// Redux hooks
+import { useSelector, useDispatch } from 'react-redux';
+import { setCart } from '../../store';
 // My components
 import Cart from '../cart/Cart';
 // MUI components
@@ -8,27 +11,51 @@ import {
   Typography,
   AppBar,
   Toolbar,
-  Button,
+  Badge,
   Drawer,
   IconButton,
 } from '@mui/material';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import PersonIcon from '@mui/icons-material/Person';
+import ShoppingBagSharpIcon from '@mui/icons-material/ShoppingBagSharp';
 // React Router hooks
 import { Link } from 'react-router-dom';
 // Auth
 import Auth from '../../utils/auth';
 
 const Header = () => {
+  // Redux dispatch setup
+  const dispatch = useDispatch();
+  // State to control the cart drawer
   const [openDrawer, setOpenDrawer] = useState(false);
+  // Get the user's cart from the Redux store
+  const cart = useSelector((state) => state.cart);
 
+  // useEffect hooks to handle updating the cart state from localStorage
+  useEffect(() => {
+    // Function to get the user's cart from localStorage
+    const getCart = () => {
+      // Get the user's cart from localStorage
+      const userCart = JSON.parse(localStorage.getItem('userCart')) || [];
+      // Update the cart state in the Redux store
+      dispatch(setCart(userCart));
+    };
+    // If the cart is empty, get the user's cart from localStorage
+    if (!cart.length) {
+      getCart();
+    }
+  }, [cart.length, dispatch]);
+
+  // Handle opening the cart drawer
   const handleOpenDrawer = () => {
     setOpenDrawer(true);
   };
 
+  // Handle closing the cart drawer
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
   };
 
+  // Check if the user is logged in
   const isLoggedIn = Auth.loggedIn();
 
   return (
@@ -45,56 +72,42 @@ const Header = () => {
             Odachi
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: 'flex', mr: 7 }}>
-            {isLoggedIn ? (
-              <Button
-                onClick={Auth.logout}
-                variant="text"
+          <Box
+            sx={{
+              display: 'flex',
+              mr: 7,
+            }}
+          >
+            <IconButton
+              component={Link}
+              to={isLoggedIn ? '/account' : '/login'}
+              color="inherit"
+              aria-label="account"
+              sx={{
+                mr: 2,
+              }}
+            >
+              <PersonIcon
+                color="primary"
                 sx={{
-                  mr: 2,
-                  '&:hover': {
-                    borderBottom: '2px solid #000000',
-                  },
+                  fontSize: '2.7rem',
                 }}
-              >
-                Logout
-              </Button>
-            ) : (
-              <>
-                <Button
-                  component={Link}
-                  to="/register"
-                  variant="text"
-                  sx={{
-                    mr: 2,
-                    '&:hover': {
-                      backgroundColor: '#000000',
-                      color: 'white',
-                    },
-                  }}
-                >
-                  Register
-                </Button>
-                <Button
-                  component={Link}
-                  to="/login"
-                  variant="text"
-                  sx={{
-                    '&:hover': {
-                      borderBottom: '2px solid #000000',
-                    },
-                  }}
-                >
-                  Login
-                </Button>
-              </>
-            )}
-            <Button onClick={handleOpenDrawer}>Your Cart</Button>
+              />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              aria-label="cart"
+              onClick={handleOpenDrawer}
+            >
+              <Badge badgeContent={cart.length} color="primary">
+                <ShoppingBagSharpIcon fontSize="large" color="primary" />
+              </Badge>
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
       <Drawer open={openDrawer} anchor="right">
-        <Cart handleCartClose={handleCloseDrawer} />
+        <Cart handleCartClose={handleCloseDrawer} cart={cart} />
       </Drawer>
     </Box>
   );
