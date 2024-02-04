@@ -10,7 +10,9 @@ import {
   Toolbar,
   Button,
   Drawer,
+  IconButton,
 } from '@mui/material';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 // React Router hooks
 import { Link } from 'react-router-dom';
 // Auth
