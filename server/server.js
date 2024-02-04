@@ -4,7 +4,6 @@ const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
 const session = require('express-session');
 const path = require('path');
-require('dotenv').config();
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
@@ -19,6 +18,13 @@ const main = async () => {
   });
 
   const app = express();
+
+  app.use(
+    cors({
+      origin: 'http://localhost:5173',
+      credentials: true,
+    })
+  );
 
   const sess = {
     secret: process.env.SESSION_SECRET,
@@ -44,7 +50,7 @@ const main = async () => {
   });
 
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   db.once('open', () => {
     app.listen(PORT, () => {

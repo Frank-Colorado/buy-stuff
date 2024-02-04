@@ -59,7 +59,6 @@ const resolvers = {
       const url = new URL(context.headers.referer).origin;
       // create a new form object in the session
       context.session.form = form;
-      console.log(context.session);
       // create lineItems for the stripe checkout session
       const lineItemsPromises = items.map(async (item) => {
         try {
@@ -210,7 +209,6 @@ const resolvers = {
         let orderData;
         // retrieve the form data from the express session
         const form = context.session.form;
-        console.log(context.session);
         // if the form data is not found, throw an error
         if (!form) {
           throw new Error('Form data not found');
@@ -223,6 +221,16 @@ const resolvers = {
             shippingAddress: form.shippingAddress,
             billingAddress: form.billingAddress,
           };
+          // Create a new order with the orderData
+          const order = await Order.create(orderData);
+          // Then update the user's orders to include the new order
+          await User.findByIdAndUpdate(context.user._id, {
+            $push: { orders: order._id },
+          });
+          // Once the order is created, clear the form data from the session
+          delete context.session.form;
+          // return the order
+          return order;
         }
         // If the user is not logged in, use the guestEmail as the customer
         if (!context.user) {
@@ -232,11 +240,13 @@ const resolvers = {
             shippingAddress: form.shippingAddress,
             billingAddress: form.billingAddress,
           };
+          // Create a new order with the orderData
+          const order = await Order.create(orderData);
+          // Once the order is created, clear the form data from the session
+          delete context.session.form;
+          // return the order
+          return order;
         }
-        // create a new order
-        const order = await Order.create(orderData);
-        // return the order
-        return order;
       } catch (err) {
         console.error('Error adding order', err);
         throw new Error('Failed to add order');

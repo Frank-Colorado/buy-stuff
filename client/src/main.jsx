@@ -26,6 +26,7 @@ const graphqlUri = isDev ? 'http://localhost:3001/graphql' : '/graphql';
 
 const httpLink = createHttpLink({
   uri: graphqlUri,
+  credentials: 'include',
 });
 
 const authLink = setContext((_, { headers }) => {
