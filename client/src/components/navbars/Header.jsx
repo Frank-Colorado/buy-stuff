@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCart } from '../../store';
 // My components
 import Cart from '../cart/Cart';
+import AdminNav from './AdminNav';
 // MUI components
 import {
   Box,
@@ -57,11 +58,21 @@ const Header = () => {
 
   // Check if the user is logged in
   const isLoggedIn = Auth.loggedIn();
+  // Check if the user is an admin
+  const isAdmin = Auth.isAdmin();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary">
-        <Toolbar sx={{ height: '6.5rem' }}>
+      <AppBar position="fixed" color="secondary" sx={{ height: '6.5rem' }}>
+        {isAdmin && <AdminNav />}
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
           <Typography
             component={Link}
             to="/"

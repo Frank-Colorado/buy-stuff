@@ -8,7 +8,7 @@ html,
 body,
 #root,
 .App {
-  height: 100vh;
+  height: calc(100vh - 6.5rem);
 }
 
 *,
@@ -39,5 +39,5 @@ a:hover {
   width: 100%;
   min-height: calc(100vh - 10.5rem);
   padding: 0;
-  margin: 0 auto;
+  margin-top: 6.5rem;
 }

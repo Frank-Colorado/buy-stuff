@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Navbar Components
-import AdminNav from './components/navbars/AdminNav.jsx';
 import Header from './components/navbars/Header.jsx';
 import Footer from './components/navbars/Footer.jsx';
 // Pages
@@ -13,23 +12,12 @@ import ProductPage from './pages/ProductPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import SuccessPage from './pages/SuccessPage.jsx';
 import AccountPage from './pages/AccountPage.jsx';
-// Auth
-import Auth from './utils/auth.js';
 
 const App = () => {
-  const isAdmin = Auth.isAdmin();
-
   return (
     <Router>
       <div className="App">
-        {isAdmin ? (
-          <>
-            <AdminNav />
-            <Header />
-          </>
-        ) : (
-          <Header />
-        )}
+        <Header />
         <div className="main">
           <Routes>
             <Route path="/" element={<HomePage />} />
