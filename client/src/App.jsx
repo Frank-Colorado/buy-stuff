@@ -12,6 +12,7 @@ import CollectionsPage from './pages/CollectionsPage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import SuccessPage from './pages/SuccessPage.jsx';
+import AccountPage from './pages/AccountPage.jsx';
 // Auth
 import Auth from './utils/auth.js';
 
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/products/:id" element={<ProductPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/success" element={<SuccessPage />} />
+            <Route path="/account" element={<AccountPage />} />
           </Routes>
         </div>
         <Footer />
