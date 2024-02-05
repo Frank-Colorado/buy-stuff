@@ -203,7 +203,7 @@ const resolvers = {
       throw new AuthenticationError('Not authorized');
     },
     // Mutation for adding an order
-    addOrder: async (_root, { products }, context) => {
+    addOrder: async (_root, { products, subtotal, paymentStatus }, context) => {
       try {
         // declare a variable to store the order data
         let orderData;
@@ -220,6 +220,8 @@ const resolvers = {
             customer: context.user._id,
             shippingAddress: form.shippingAddress,
             billingAddress: form.billingAddress,
+            subtotal,
+            paymentStatus,
           };
           // Create a new order with the orderData
           const order = await Order.create(orderData);
@@ -239,6 +241,8 @@ const resolvers = {
             guestEmail: form.email,
             shippingAddress: form.shippingAddress,
             billingAddress: form.billingAddress,
+            subtotal,
+            paymentStatus,
           };
           // Create a new order with the orderData
           const order = await Order.create(orderData);

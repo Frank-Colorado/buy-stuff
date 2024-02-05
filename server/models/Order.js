@@ -36,6 +36,17 @@ const OrderSchema = new Schema({
     type: AddressSchema,
     required: [true, 'Billing address is required'],
   },
+  subtotal: {
+    type: Number,
+  },
+  fulfilled: {
+    type: Boolean,
+    default: false,
+  },
+  paymentStatus: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Order = model('Order', OrderSchema);

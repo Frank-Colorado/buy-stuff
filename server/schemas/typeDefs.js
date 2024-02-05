@@ -44,6 +44,9 @@ const typeDefs = gql`
     shippingAddress: Address
     billingAddress: Address
     products: [Product]
+    subtotal: Float
+    fulfilled: Boolean
+    paymentStatus: Boolean
   }
 
   type ClothingResult {
@@ -128,7 +131,11 @@ const typeDefs = gql`
       imageUrl: String
     ): Clothing
     deleteClothing(clothingId: ID!): Clothing
-    addOrder(products: [ProductInput]!): Order
+    addOrder(
+      products: [ProductInput]!
+      subtotal: Float!
+      paymentStatus: Boolean!
+    ): Order
   }
 `;
 
