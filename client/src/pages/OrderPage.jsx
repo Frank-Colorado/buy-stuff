@@ -1,3 +1,5 @@
+// My components
+import OrderDetails from '../components/orders/OrderDetails';
 // MUI components
 import { Grid, Box, CircularProgress } from '@mui/material';
 // GraphQL hooks
@@ -38,7 +40,7 @@ const OrderPage = () => {
         </Box>
       ) : (
         <Grid item xs={12} md={10} lg={8}>
-          {/** Order details */}
+          <OrderDetails order={order} />
         </Grid>
       )}
     </Grid>
