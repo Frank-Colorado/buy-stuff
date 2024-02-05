@@ -17,8 +17,12 @@ const SuccessPage = () => {
       try {
         // Get the user's cart from localStorage
         const cart = JSON.parse(localStorage.getItem('userCart'));
+        // A variable for the subtotal
+        let subtotal = 0;
         // Create a products array to hold the cart items
         const products = cart.map((item) => {
+          // For each item in the cart, add the item's price multiplied by the quantity to the subtotal
+          subtotal += item.price * item.quantity;
           return {
             productId: item.id,
             selectedSize: item.size,
@@ -31,6 +35,8 @@ const SuccessPage = () => {
           await addOrder({
             variables: {
               products,
+              subtotal,
+              paymentStatus: true,
             },
           });
         }
