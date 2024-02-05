@@ -127,7 +127,6 @@ const resolvers = {
     },
     // Get a single order by its _id
     getOrder: async (_root, { orderId }, context) => {
-      console.log(orderId);
       // if the user is logged in
       if (context.user) {
         try {

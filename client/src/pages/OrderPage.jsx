@@ -18,7 +18,6 @@ const OrderPage = () => {
   });
 
   const order = data?.getOrder || {};
-  console.log(order);
 
   return (
     <Grid
