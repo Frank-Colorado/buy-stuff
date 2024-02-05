@@ -37,7 +37,7 @@ const AccountDetails = ({ orders }) => {
                   <TableCell component="th" scope="row" sx={{ width: '20%' }}>
                     <Typography
                       component={Link}
-                      to={`account/orders/${order._id}`}
+                      to={`orders/${order._id}`}
                       variant="subtitle1"
                       sx={{
                         width: 'fit-content',
