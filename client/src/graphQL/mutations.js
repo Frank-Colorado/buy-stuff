@@ -108,8 +108,16 @@ export const DELETE_PRODUCT = gql`
 `;
 
 export const ADD_ORDER = gql`
-  mutation addOrder($products: [ProductInput]!) {
-    addOrder(products: $products) {
+  mutation addOrder(
+    $products: [ProductInput]!
+    $subtotal: Float!
+    $paymentStatus: Boolean!
+  ) {
+    addOrder(
+      products: $products
+      subtotal: $subtotal
+      paymentStatus: $paymentStatus
+    ) {
       _id
       purchaseDate
       customer {
@@ -139,6 +147,9 @@ export const ADD_ORDER = gql`
         zip
         country
       }
+      subtotal
+      fulfilled
+      paymentStatus
     }
   }
 `;
