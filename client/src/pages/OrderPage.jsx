@@ -14,8 +14,6 @@ const OrderPage = () => {
     variables: { orderId: id },
   });
 
-  console.log(error);
-
   const order = data?.getOrder || {};
   console.log(order);
 
