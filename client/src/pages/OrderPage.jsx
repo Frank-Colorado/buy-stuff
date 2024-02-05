@@ -1,4 +1,5 @@
 // My components
+import OrderHeader from '../components/orders/OrderHeader';
 import OrderDetails from '../components/orders/OrderDetails';
 // MUI components
 import { Grid, Box, CircularProgress } from '@mui/material';
@@ -40,6 +41,7 @@ const OrderPage = () => {
         </Box>
       ) : (
         <Grid item xs={12} md={10} lg={8}>
+          <OrderHeader order={order} />
           <OrderDetails order={order} />
         </Grid>
       )}

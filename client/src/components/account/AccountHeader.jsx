@@ -11,7 +11,7 @@ const AccountHeader = ({ name }) => {
   return (
     <Box
       sx={{
-        height: '10rem',
+        height: '20%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
