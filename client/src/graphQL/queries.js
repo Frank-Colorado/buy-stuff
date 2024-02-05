@@ -7,6 +7,13 @@ export const QUERY_ME = gql`
       username
       email
       roles
+      orders {
+        _id
+        purchaseDate
+        subtotal
+        fulfilled
+        paymentStatus
+      }
     }
   }
 `;

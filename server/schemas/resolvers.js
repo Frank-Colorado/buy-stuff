@@ -6,35 +6,51 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const resolvers = {
   Query: {
+    // Get user data
     me: async (_root, _args, context) => {
+      // if the user is logged in
       if (context.user) {
         try {
-          const userData = await User.findById(context.user._id);
-
+          // find the user by the user's _id and populate the user's orders
+          const userData = await User.findById(context.user._id).populate({
+            path: 'orders',
+            select: '-__v',
+          });
+          // return the user data
           return userData;
         } catch (err) {
+          // Error handling for getting user data
           console.log('Error getting user data', err);
-          throw new AuthenticationError('Failed to get user data');
+          throw new Error('Failed to get user data');
         }
       }
+      // if the user is not logged in, throw an error
       throw new AuthenticationError('Not logged in');
     },
     // Get all clothing items
     allClothing: async () => {
       try {
+        // find all clothing items
         const clothing = await Clothing.find();
+        // return the clothing items
         return clothing;
       } catch (err) {
-        console.log(err);
+        // Error handling for getting all clothing items
+        console.log('Error getting all clothing', err);
+        throw new Error('Failed to get clothing items');
       }
     },
     // Get a single clothing item by its _id
     clothingById: async (_root, { clothingId }) => {
       try {
+        // find a clothing item by its _id
         const clothing = await Clothing.findById(clothingId);
+        // return the clothing item
         return clothing;
       } catch (err) {
-        console.log(err);
+        // Error handling for getting a single clothing item by its _id
+        console.log('Error getting clothing by id', err);
+        throw new Error('Failed to get clothing item by id');
       }
     },
     // Get all clothing items by category
@@ -50,7 +66,9 @@ const resolvers = {
         // return the clothing items and the count of all clothing items in the category
         return { clothing, count };
       } catch (err) {
-        console.log(err);
+        // Error handling for getting all clothing items by category
+        console.log('Error getting clothing by category', err);
+        throw new Error('Failed to get clothing items by category');
       }
     },
     // Checkout query
@@ -119,8 +137,9 @@ const resolvers = {
         // return the token and user as an Auth object
         return { token, user };
       } catch (err) {
+        // Error handling for creating a new user
         console.log('Error creating user', err);
-        throw new AuthenticationError('Failed to create user');
+        throw new Error('Failed to create user');
       }
     },
     // login mutation
@@ -143,8 +162,9 @@ const resolvers = {
         // return the token and user as an Auth object
         return { token, user };
       } catch (err) {
+        // Error handling for logging in
         console.log('Error logging in', err);
-        throw new AuthenticationError('Failed to log in');
+        throw new Error('Failed to log in');
       }
     },
     // Mutation for adding a clothing item
@@ -156,6 +176,7 @@ const resolvers = {
           const clothing = await Clothing.create({ ...args });
           return clothing;
         } catch (err) {
+          // Error handling for adding a clothing item
           console.log('Error adding clothing', err);
           throw new Error('Failed to create clothing item');
         }
@@ -179,6 +200,7 @@ const resolvers = {
           );
           return clothing;
         } catch (err) {
+          // Error handling for updating a specific clothing item
           console.log('Error updating clothing', err);
           throw new Error('Failed to update clothing item');
         }
@@ -195,6 +217,7 @@ const resolvers = {
           const clothing = await Clothing.findByIdAndDelete(clothingId);
           return clothing;
         } catch (err) {
+          // Error handling for deleting a specific clothing item
           console.log('Error deleting clothing', err);
           throw new Error('Failed to delete clothing item');
         }
@@ -252,6 +275,7 @@ const resolvers = {
           return order;
         }
       } catch (err) {
+        // Error handling for adding an order
         console.error('Error adding order', err);
         throw new Error('Failed to add order');
       }
