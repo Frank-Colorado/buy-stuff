@@ -21,8 +21,6 @@ const AccountPage = () => {
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.me || {};
 
-  console.log(user);
-
   return (
     <Grid
       container
@@ -45,7 +43,7 @@ const AccountPage = () => {
       ) : (
         <Grid item xs={12} md={10} lg={8}>
           <AccountHeader name={user.username} />
-          <AccountDetails />
+          <AccountDetails orders={user.orders} />
         </Grid>
       )}
     </Grid>
