@@ -281,7 +281,7 @@ const resolvers = {
         if (!context.user) {
           orderData = {
             products,
-            guestEmail: form.email,
+            guestEmail: form.guestEmail,
             shippingAddress: form.shippingAddress,
             billingAddress: form.billingAddress,
             subtotal,

@@ -1,7 +1,7 @@
 // React hooks
 import { useState, useEffect } from 'react';
 // MUI components
-import { Grid, Typography, TextField, Button } from '@mui/material';
+import { Grid, Box, Typography, TextField, Button } from '@mui/material';
 // React Country Selector
 import { CountryDropdown } from 'react-country-region-selector';
 // GraphQL hooks
@@ -10,6 +10,10 @@ import { QUERY_CHECKOUT } from '../../graphQL/queries';
 // Stripe API
 import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+// React Router
+import { Link } from 'react-router-dom';
+// Auth Util
+import Auth from '../../utils/auth';
 
 // Initial state for the address portion of the form
 const initialAddressState = {
@@ -31,6 +35,10 @@ const CheckoutDetails = () => {
   });
   const [recipientName, setRecipientName] = useState('');
   const [nameOnCard, setNameOnCard] = useState('');
+  const [guestEmail, setGuestEmail] = useState('');
+
+  // Check if the user is logged in
+  const loggedIn = Auth.loggedIn();
 
   // GraphQL query to get the checkout session
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
@@ -64,6 +72,11 @@ const CheckoutDetails = () => {
     });
   };
 
+  // Handle guest email change
+  const handleGuestEmailChange = (e) => {
+    setGuestEmail(e.target.value);
+  };
+
   // Handle recipient name change
   const handleRecipientNameChange = (e) => {
     setRecipientName(e.target.value);
@@ -80,7 +93,7 @@ const CheckoutDetails = () => {
     e.preventDefault();
     // Create an object to hold the form data
     const checkoutData = {
-      guestEmail: '',
+      guestEmail,
       shippingAddress: {
         name: recipientName,
         ...shippingAddress,
@@ -111,6 +124,45 @@ const CheckoutDetails = () => {
       }}
     >
       <form onSubmit={handleFormSubmit}>
+        {!loggedIn && (
+          <Box>
+            <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
+              Contact Information
+            </Typography>
+            <TextField
+              value={guestEmail}
+              onChange={handleGuestEmailChange}
+              name="guestEmail"
+              type="email"
+              required
+              size="small"
+              placeholder="Email"
+              variant="outlined"
+              fullWidth
+              sx={{ mb: 1 }}
+            />
+            <Box sx={{ display: 'flex', justifyContent: 'start', mb: 2 }}>
+              <Typography variant="subtitle1">
+                Have an account with us?
+              </Typography>
+              <Typography
+                component={Link}
+                to="/login"
+                variant="subtitle1"
+                sx={{
+                  ml: 1,
+                  textDecoration: 'none',
+                  color: 'black',
+                  '&:hover': {
+                    color: 'blue',
+                  },
+                }}
+              >
+                Login Here!
+              </Typography>
+            </Box>
+          </Box>
+        )}
         <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
           Shipping Address
         </Typography>
@@ -205,7 +257,6 @@ const CheckoutDetails = () => {
             outline: 'none',
           }}
         />
-
         <Typography variant="h5" textTransform="uppercase" sx={{ mb: 2 }}>
           Billing Address
         </Typography>

@@ -125,7 +125,9 @@ export const ADD_ORDER = gql`
         email
       }
       products {
-        productId
+        productId {
+          _id
+        }
         selectedSize
         quantity
       }
