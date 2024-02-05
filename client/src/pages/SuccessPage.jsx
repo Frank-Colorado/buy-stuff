@@ -1,5 +1,8 @@
 // React hooks
 import { useEffect } from 'react';
+// Redux hooks
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../store/slices/cartSlice';
 // GraphQL hooks
 import { useMutation } from '@apollo/client';
 import { ADD_ORDER } from '../graphQL/mutations';
@@ -7,6 +10,8 @@ import { ADD_ORDER } from '../graphQL/mutations';
 import { Box, Typography } from '@mui/material';
 
 const SuccessPage = () => {
+  // Redux dispatch
+  const dispatch = useDispatch();
   // GraphQL mutation to add an order
   const [addOrder] = useMutation(ADD_ORDER);
 
@@ -42,6 +47,8 @@ const SuccessPage = () => {
         }
         // Clear the cart in localStorage
         localStorage.removeItem('userCart');
+        // Clear the cart in the Redux store
+        dispatch(clearCart());
       } catch (error) {
         console.error('Error saving order: ', error);
       }
