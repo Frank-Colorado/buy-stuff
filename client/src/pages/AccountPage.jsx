@@ -2,7 +2,7 @@
 import AccountHeader from '../components/account/AccountHeader';
 import AccountDetails from '../components/account/AccountDetails';
 // MUI components
-import { Grid, Box, Typography, Button, CircularProgress } from '@mui/material';
+import { Grid, Box, CircularProgress } from '@mui/material';
 // GraphQL hooks
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../graphql/queries';

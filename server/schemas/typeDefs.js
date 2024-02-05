@@ -106,6 +106,7 @@ const typeDefs = gql`
     ): ClothingResult
     checkout(items: [CartItemInput]!, form: CheckoutFormInput!): Checkout
     order(orderId: ID!): Order
+    getOrder(orderId: ID!): Order
   }
 
   type Mutation {

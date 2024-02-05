@@ -125,6 +125,27 @@ const resolvers = {
       // return the session id
       return { session: session.id };
     },
+    // Get a single order by its _id
+    getOrder: async (_root, { orderId }, context) => {
+      // if the user is logged in
+      if (context.user) {
+        try {
+          // find the order by its _id
+          const order = await Order.findById(orderId).populate({
+            path: 'products.productId',
+            select: '-__v',
+          });
+          // return the order
+          return order;
+        } catch (err) {
+          // Error handling for getting a single order by its _id
+          console.log('Error getting order', err);
+          throw new Error('Failed to get order');
+        }
+      }
+      // if the user is not logged in, throw an error
+      throw new AuthenticationError('Not logged in');
+    },
   },
   Mutation: {
     // Mutation for creating a new user
