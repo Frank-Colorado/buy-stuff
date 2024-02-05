@@ -1,12 +1,5 @@
 // MUI components
-import {
-  Box,
-  Card,
-  CardMedia,
-  CardContent,
-  Button,
-  Typography,
-} from '@mui/material';
+import { Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
 // React router hooks
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +26,7 @@ const ProductCard = ({ product }) => {
         <CardMedia
           component="img"
           alt="product image"
-          height="250"
+          height="180"
           sx={{ objectFit: 'contain', cursor: 'pointer' }}
           onClick={handleClick}
           src={imageUrl}
@@ -66,9 +59,6 @@ const ProductCard = ({ product }) => {
           >
             ${price}.00
           </Typography>
-          <Button variant="contained" color="primary">
-            Add to Cart
-          </Button>
         </CardContent>
       </Card>
     </Box>

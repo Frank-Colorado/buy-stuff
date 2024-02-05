@@ -72,6 +72,7 @@ const CollectionsPage = () => {
         item
         xs={12}
         sx={{
+          height: '100%',
           px: { xs: 0, md: 10 },
         }}
       >
@@ -94,7 +95,7 @@ const CollectionsPage = () => {
               }}
             >
               <Typography variant="h2" align="left" sx={{ my: 2 }}>
-                Browse {category}'s Collection
+                Browse {category} Collection
               </Typography>
             </Box>
             <BrowseProducts
