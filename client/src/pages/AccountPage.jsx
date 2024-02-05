@@ -1,3 +1,6 @@
+// My Components
+import AccountHeader from '../components/account/AccountHeader';
+import AccountDetails from '../components/account/AccountDetails';
 // MUI components
 import { Grid, Box, Typography, Button, CircularProgress } from '@mui/material';
 // GraphQL hooks
@@ -41,9 +44,8 @@ const AccountPage = () => {
         </Box>
       ) : (
         <Grid item xs={12} md={10} lg={8}>
-          <Typography variant="h2" align="center" sx={{ my: 2 }}>
-            My Account
-          </Typography>
+          <AccountHeader />
+          <AccountDetails />
         </Grid>
       )}
     </Grid>
