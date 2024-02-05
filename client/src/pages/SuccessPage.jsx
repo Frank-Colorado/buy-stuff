@@ -51,13 +51,27 @@ const SuccessPage = () => {
   }, [addOrder]);
 
   return (
-    <Box sx={{ textAlign: 'center', mt: 10 }}>
-      <Typography variant="h4" gutterBottom>
-        Thank you for your purchase!
-      </Typography>
-      <Typography variant="body1">
-        Your order has been placed and will be shipped shortly.
-      </Typography>
+    <Box
+      sx={{
+        height: 'calc(100vh - 10.5rem)',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '50%',
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          Thank you for your purchase!
+        </Typography>
+        <Typography variant="body1">
+          Your order has been placed and will be shipped shortly.
+        </Typography>
+      </Box>
     </Box>
   );
 };
