@@ -83,10 +83,12 @@ export const QUERY_ORDER_BY_ID = gql`
       fulfilled
       paymentStatus
       products {
-        _id
-        name
-        price
-        imageUrl
+        productId {
+          _id
+          name
+          imageUrl
+          price
+        }
         selectedSize
         quantity
       }

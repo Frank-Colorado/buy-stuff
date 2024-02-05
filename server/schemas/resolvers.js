@@ -127,14 +127,14 @@ const resolvers = {
     },
     // Get a single order by its _id
     getOrder: async (_root, { orderId }, context) => {
+      console.log(orderId);
       // if the user is logged in
       if (context.user) {
         try {
           // find the order by its _id
-          const order = await Order.findById(orderId).populate({
-            path: 'products.productId',
-            select: '-__v',
-          });
+          const order = await Order.findById(orderId).populate(
+            'products.productId'
+          );
           // return the order
           return order;
         } catch (err) {

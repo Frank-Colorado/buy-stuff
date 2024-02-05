@@ -31,7 +31,7 @@ const typeDefs = gql`
   }
 
   type Product {
-    productId: ID
+    productId: Clothing
     selectedSize: String
     quantity: Int
   }
