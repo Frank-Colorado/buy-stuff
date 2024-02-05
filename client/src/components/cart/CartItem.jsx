@@ -171,6 +171,7 @@ const CartItem = ({ item: { cartId, image, name, size, price, quantity } }) => {
               textTransform="uppercase"
               variant="h7"
               sx={{
+                width: 'fit-content',
                 cursor: 'pointer',
                 '&::after': {
                   content: '""',

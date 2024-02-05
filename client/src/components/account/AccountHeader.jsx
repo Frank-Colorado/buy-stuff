@@ -23,11 +23,12 @@ const AccountHeader = ({ name }) => {
         textTransform="uppercase"
         variant="h7"
         sx={{
+          width: 'fit-content',
           cursor: 'pointer',
           '&::after': {
             content: '""',
             display: 'block',
-            width: '5%',
+            width: '100%',
             height: '1px',
             backgroundColor: 'black',
             transition: 'transform .5s ease',

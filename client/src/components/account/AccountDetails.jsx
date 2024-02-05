@@ -9,9 +9,10 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+// React Router
+import { Link } from 'react-router-dom';
 
 const AccountDetails = ({ orders }) => {
-  console.log(orders);
   return (
     <Box>
       <TableContainer>
@@ -33,15 +34,15 @@ const AccountDetails = ({ orders }) => {
 
               return (
                 <TableRow key={order._id}>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    sx={{ width: '19%', cursor: 'pointer' }}
-                  >
+                  <TableCell component="th" scope="row" sx={{ width: '20%' }}>
                     <Typography
+                      component={Link}
+                      to={`account/orders/${order._id}`}
                       variant="subtitle1"
                       sx={{
-                        cursor: 'pointer',
+                        width: 'fit-content',
+                        textDecoration: 'none',
+                        color: 'black',
                         '&::after': {
                           content: '""',
                           display: 'block',
