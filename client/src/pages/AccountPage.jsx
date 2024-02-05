@@ -44,7 +44,7 @@ const AccountPage = () => {
         </Box>
       ) : (
         <Grid item xs={12} md={10} lg={8}>
-          <AccountHeader />
+          <AccountHeader name={user.username} />
           <AccountDetails />
         </Grid>
       )}
