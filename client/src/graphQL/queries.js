@@ -73,3 +73,23 @@ export const QUERY_CHECKOUT = gql`
     }
   }
 `;
+
+export const QUERY_ORDER_BY_ID = gql`
+  query getOrder($orderId: ID!) {
+    getOrder(orderId: $orderId) {
+      _id
+      purchaseDate
+      subtotal
+      fulfilled
+      paymentStatus
+      products {
+        _id
+        name
+        price
+        imageUrl
+        selectedSize
+        quantity
+      }
+    }
+  }
+`;
