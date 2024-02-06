@@ -21,7 +21,11 @@ const main = async () => {
 
   app.use(
     cors({
-      origin: 'http://localhost:5173',
+      origin:
+        process.env.NODE_ENV === 'production'
+          ? process.env.PRODUCTION_ORIGIN
+          : 'http://localhost:5173',
+
       credentials: true,
     })
   );
