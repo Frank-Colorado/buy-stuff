@@ -35,8 +35,14 @@ const DirectoryImage = ({ image, title }) => {
             textDecoration: 'none',
             color: 'black',
             backgroundColor: 'white',
-            border: '1px solid black',
             padding: '0.5rem',
+            background: 'linear-gradient(to left, white 50%, black 50%) right',
+            backgroundSize: '200%',
+            transition: 'all 0.5s ease',
+            '&:hover': {
+              color: 'white',
+              backgroundPosition: 'left',
+            },
           }}
         >
           Shop {title}

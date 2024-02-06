@@ -30,11 +30,11 @@ const RegisterPage = () => {
         <SignupForm />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="subtitle1">Already have an account?</Typography>
+        <Typography variant="body1">Already have an account?</Typography>
         <Typography
           component={Link}
           to="/login"
-          variant="subtitle1"
+          variant="body1"
           sx={{
             ml: 1,
             textDecoration: 'none',

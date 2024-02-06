@@ -122,7 +122,23 @@ const SignupForm = () => {
           variant="outlined"
           sx={{ mb: 1 }}
         />
-        <Button fullWidth variant="contained" sx={{ mb: 1 }} type="submit">
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{
+            mb: 1,
+            color: 'white',
+            bgColor: 'black',
+            background: 'linear-gradient(to left, black 50%, white 50%) right',
+            backgroundSize: '200%',
+            transition: 'all 0.5s ease',
+            '&:hover': {
+              color: 'black',
+              backgroundPosition: 'left',
+            },
+          }}
+          type="submit"
+        >
           Register
         </Button>
       </form>

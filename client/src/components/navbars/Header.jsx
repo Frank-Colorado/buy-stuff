@@ -78,7 +78,12 @@ const Header = () => {
             to="/"
             align="center"
             variant="h2"
-            sx={{ fontWeight: 'bold', textDecoration: 'none', color: 'Black' }}
+            sx={{
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              color: 'Black',
+              ml: 6,
+            }}
           >
             Odachi
           </Typography>

@@ -39,12 +39,11 @@ const ProductCard = ({ product }) => {
         >
           <Typography
             variant="h6"
-            fontWeight="bold"
             onClick={handleClick}
             sx={{
               cursor: 'pointer',
               '&:hover': {
-                color: 'blue',
+                color: 'gray',
               },
             }}
           >

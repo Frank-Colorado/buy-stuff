@@ -82,6 +82,15 @@ const Cart = ({ handleCartClose, cart }) => {
           color="primary"
           sx={{
             width: '80%',
+            color: 'white',
+            bgColor: 'black',
+            background: 'linear-gradient(to left, black 50%, white 50%) right',
+            backgroundSize: '200%',
+            transition: 'all 0.5s ease',
+            '&:hover': {
+              color: 'black',
+              backgroundPosition: 'left',
+            },
           }}
         >
           Checkout - $
