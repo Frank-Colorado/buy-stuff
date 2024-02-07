@@ -351,7 +351,24 @@ const CheckoutDetails = () => {
             outline: 'none',
           }}
         />
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{
+            mt: 2,
+            color: 'white',
+            bgColor: 'black',
+            background: 'linear-gradient(to left, black 50%, white 50%) right',
+            backgroundSize: '200%',
+            transition: 'all 0.5s ease',
+            '&:hover': {
+              color: 'black',
+              backgroundPosition: 'left',
+            },
+          }}
+        >
           Continue to Payment
         </Button>
       </form>

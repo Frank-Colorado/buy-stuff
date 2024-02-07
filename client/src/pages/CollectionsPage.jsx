@@ -72,15 +72,14 @@ const CollectionsPage = () => {
         item
         xs={12}
         sx={{
-          height: '100%',
           px: { xs: 0, md: 10 },
         }}
       >
         {loading ? (
           <Box
             sx={{
-              height: '100%',
               display: 'flex',
+              height: '100%',
               justifyContent: 'center',
               alignItems: 'center',
             }}
@@ -103,29 +102,29 @@ const CollectionsPage = () => {
               filter={filter}
               handleFilter={handleFilterChange}
             />
+            {hasMore && (
+              <Button
+                onClick={handleLoadMore}
+                variant="contained"
+                fullWidth
+                sx={{
+                  mb: 2,
+                  color: 'white',
+                  bgColor: 'black',
+                  background:
+                    'linear-gradient(to left, black 50%, white 50%) right',
+                  backgroundSize: '200%',
+                  transition: 'all 0.5s ease',
+                  '&:hover': {
+                    color: 'black',
+                    backgroundPosition: 'left',
+                  },
+                }}
+              >
+                Load More
+              </Button>
+            )}
           </Box>
-        )}
-        {hasMore && (
-          <Button
-            onClick={handleLoadMore}
-            variant="contained"
-            fullWidth
-            sx={{
-              mb: 2,
-              color: 'white',
-              bgColor: 'black',
-              background:
-                'linear-gradient(to left, black 50%, white 50%) right',
-              backgroundSize: '200%',
-              transition: 'all 0.5s ease',
-              '&:hover': {
-                color: 'black',
-                backgroundPosition: 'left',
-              },
-            }}
-          >
-            Load More
-          </Button>
         )}
       </Grid>
     </Grid>
