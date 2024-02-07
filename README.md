@@ -4,7 +4,7 @@
 
 ## Description
 
-This is an example ecommerce app I made using Stripe for payment processing. It is a full stack web application that uses React, Redux, Node.js, Express, GraphQL, and MongoDB. It is a simple ecommerce app that allows users to add items to their cart and purchase them using Stripe. It also has an admin page that allows the admin to add, edit, and delete items from the store.
+This is an example ecommerce app I made using Stripe for payment processing. It is a full stack web application that uses React, Redux, Node.js, Express, GraphQL, and MongoDB. It is an ecommerce app that allows users to add items to their cart and purchase them using Stripe. If the user is signed up with an account they will have a profile page that allows them to record and track their previous orders made at the store. It also has an admin page that allows the admin to add, edit, and delete items from the store.
 
 ## Table of Contents
 
