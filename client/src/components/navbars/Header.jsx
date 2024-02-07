@@ -85,7 +85,7 @@ const Header = () => {
               ml: 6,
             }}
           >
-            Odachi
+            Buy Stuff
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box
