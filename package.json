@@ -2,7 +2,7 @@
   "name": "ecommerceapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
     "postinstall": "cd client && npm run build"
