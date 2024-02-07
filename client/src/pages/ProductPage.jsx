@@ -6,7 +6,7 @@ import ProductDetails from '../components/product/ProductDetails';
 import { Grid, Box, Typography, CircularProgress, Button } from '@mui/material';
 // GraphQL hooks
 import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCT_BY_ID } from '../graphql/queries';
+import { QUERY_PRODUCT_BY_ID } from '../graphQL/queries';
 
 const ProductPage = () => {
   // Get the id from the URL

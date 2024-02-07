@@ -1,9 +1,14 @@
+// React hooks
 import { useState } from 'react';
+// MUI components
 import { Box, TextField, Button, Typography } from '@mui/material';
+// GraphQL hooks
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../../graphQL/mutations';
+// Auth Utils
 import Auth from '../../utils/auth';
 
+// Initial State for form
 const initialState = {
   username: '',
   email: '',

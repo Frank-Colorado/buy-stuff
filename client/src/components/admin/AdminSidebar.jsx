@@ -1,3 +1,4 @@
+// MUI components
 import { Box, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 

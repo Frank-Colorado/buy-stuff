@@ -1,9 +1,14 @@
+// React Hooks
 import { useState } from 'react';
+// MUI components
 import { Box, TextField, Button, Typography } from '@mui/material';
+// GraphQL hooks
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../graphQL/mutations';
+// Auth Utils
 import Auth from '../../utils/auth';
 
+// Initial State for form
 const initialState = {
   email: '',
   password: '',
@@ -17,31 +22,41 @@ const LoginForm = () => {
   // GraphQL Login Mutation
   const [loginUser] = useMutation(LOGIN_USER);
 
+  // Change Handler
   const handleChange = (e) => {
+    // Get the name and value from the event target
     const { name, value } = e.target;
 
+    // Set the form state
     setFormState({
       ...formState,
       [name]: value,
     });
   };
 
+  // Handle for form submission
   const handleSubmit = async (e) => {
+    // Prevent the default form submission
     e.preventDefault();
 
     try {
+      // Use the loginUser mutation to login the user
       const { data } = await loginUser({
         variables: { ...formState },
       });
 
+      // If there is data, then login the user
       if (data) {
+        // Use the Auth.login util to create a token in local storage
         Auth.login(data.login.token);
       }
     } catch (err) {
+      // If there is an error, log it to the console and set the error state
       console.error(err);
       setErrorState(err.message);
       return;
     }
+    // Reset the form state and error state
     setFormState({ ...initialState });
     setErrorState(null);
   };

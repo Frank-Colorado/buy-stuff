@@ -8,7 +8,7 @@ import BrowseProducts from '../components/collections/BrowseProducts';
 import { Grid, Box, Typography, CircularProgress, Button } from '@mui/material';
 // GraphQL hooks
 import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCT_BY_CATEGORY } from '../graphql/queries';
+import { QUERY_PRODUCT_BY_CATEGORY } from '../graphQL/queries';
 
 const CollectionsPage = () => {
   // State for the pagination

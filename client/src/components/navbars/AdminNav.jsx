@@ -1,4 +1,6 @@
+// MUI components
 import { Box, Typography } from '@mui/material';
+// React Router components
 import { Link } from 'react-router-dom';
 
 const AdminNav = () => {

@@ -1,3 +1,4 @@
+// MUI components
 import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 

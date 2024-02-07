@@ -5,7 +5,7 @@ import OrderDetails from '../components/orders/OrderDetails';
 import { Grid, Box, CircularProgress } from '@mui/material';
 // GraphQL hooks
 import { useQuery } from '@apollo/client';
-import { QUERY_ORDER_BY_ID } from '../graphql/queries';
+import { QUERY_ORDER_BY_ID } from '../graphQL/queries';
 // React Router hooks
 import { useParams } from 'react-router-dom';
 

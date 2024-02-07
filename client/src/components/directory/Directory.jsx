@@ -1,3 +1,4 @@
+// My components
 import DirectoryImage from './DirectoryImage.jsx';
 import WomensPhoto from './../../assets/shopWomens.jpg';
 import MensPhoto from './../../assets/shopMen.jpg';

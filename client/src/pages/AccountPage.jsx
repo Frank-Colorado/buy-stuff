@@ -5,7 +5,7 @@ import AccountDetails from '../components/account/AccountDetails';
 import { Grid, Box, CircularProgress } from '@mui/material';
 // GraphQL hooks
 import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../graphql/queries';
+import { QUERY_ME } from '../graphQL/queries';
 // Custom Auth
 import Auth from '../utils/auth';
 
